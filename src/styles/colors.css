@@ -10,6 +10,9 @@
 
     --navbar-background-color: #ffffff;
 
+    --title-text-shadow-color: #ffffff;
+    --title-unimportant-subtext-color: rgba(255, 255, 255, 0.5);;
+
     --retro-column-color: rgba(74, 57, 77, 0.651);
     --retro-card-color-defalut: rgb(138, 77, 145);
     --retro-card-color-draft: rgb(122, 122, 122);

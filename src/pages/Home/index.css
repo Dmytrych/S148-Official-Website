@@ -4,6 +4,7 @@
 }
 
 .title-page {
+    z-index: 0;
     height: 90vh;
     background: linear-gradient(
         240.51deg,
@@ -12,8 +13,8 @@
 }
 
 .scratch-mark {
+    z-index: 1;
     position: absolute;
-    z-index: 0;
     transform: rotate(-4deg);
     height: 100vh;
     left: 15vw;
@@ -41,6 +42,33 @@
     height: 65%;
 }
 
-.title-text {
-    font-family: "Squares Bold";
+.main-page-title-text {
+    text-shadow: 0px 4px 10px var(--title-text-shadow-color);
+    width: min-content;
+    font-size: 5rem;
+}
+
+.main-page-text {
+    z-index: 1;
+    position: absolute;
+    left: 10vw;
+    top: 20vh;
+}
+
+.main-page-title-subtext {
+    margin-top: 10vh;
+}
+
+.main-page-title-description {
+    width: 30vw;
+    font-size: 2rem;
+}
+
+.buy-button {
+    font-size: 1.5rem;
+}
+
+.slogan {
+    color: var(--title-unimportant-subtext-color);
+    font-size: 1rem;
 }

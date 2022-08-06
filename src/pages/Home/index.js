@@ -3,6 +3,7 @@ import OrderForm from '../../components/OrderForm';
 import scratch from './Vector.svg';
 import bottle from './pngwing 1.png'
 import { locale } from '../../locale/ua';
+import RoundButton from '../../components/RoundButton';
 import './index.css'
 
 export default function Home() {
@@ -14,8 +15,19 @@ export default function Home() {
                     <img className='big-bottle' src={bottle}/>
                     <img className='small-bottle' src={bottle}/>
                 </div>
-                <div>
-                    {locale.universal_oil}
+                <div className='main-page-text'>
+                    <div className='main-page-title-text'>
+                        {locale.universal_oil}
+                    </div>
+                    <div className='main-page-title-subtext main-page-title-description'>
+                        {locale.universal_oil_detailed}
+                    </div>
+                    <div className='main-page-title-subtext buy-button'>
+                        <RoundButton text={locale.buy}/>
+                    </div>
+                    <div className='main-page-title-subtext slogan'>
+                        {locale.slogan}
+                    </div>
                 </div>
             </div>
         </div>

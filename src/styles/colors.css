@@ -1,0 +1,16 @@
+.light-theme {
+    --global-text-color: #e795da;
+    --global-primary-title-size: 2rem;
+    --global-color-primary: #59315e;
+    --global-color-primary-highlight: #a150ac;
+    --global-color-secondary: #779fa1;
+    --global-color-warning: #e28413;
+    --global-color-danger: #ff6542;
+    --global-background-color: #339557;
+
+    --navbar-background-color: #ffffff;
+
+    --retro-column-color: rgba(74, 57, 77, 0.651);
+    --retro-card-color-defalut: rgb(138, 77, 145);
+    --retro-card-color-draft: rgb(122, 122, 122);
+}

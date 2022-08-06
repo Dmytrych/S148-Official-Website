@@ -1,0 +1,46 @@
+.main-frame {
+    min-height: 90vh;
+    width: 100%;
+}
+
+.title-page {
+    height: 90vh;
+    background: linear-gradient(
+        240.51deg,
+        #22ff004f 4.27%,
+        #07202CD9 114.23%);
+}
+
+.scratch-mark {
+    position: absolute;
+    z-index: 0;
+    transform: rotate(-4deg);
+    height: 100vh;
+    left: 15vw;
+    top: -3vh;
+}
+
+.bottles {
+    position: absolute;
+    height: 60vh;
+    top: 30vh;
+    left: 60vw;
+}
+
+.big-bottle {
+    position: relative;
+    object-fit: cover;
+    height: 100%;
+}
+
+.small-bottle {
+    position: absolute;
+    object-fit: cover;
+    bottom: 0%;
+    left: 60%;
+    height: 65%;
+}
+
+.title-text {
+    font-family: "Squares Bold";
+}

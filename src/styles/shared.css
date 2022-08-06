@@ -1,0 +1,45 @@
+body {
+    --global-font-family: Verdana, sans-serif;
+    --global-font-size: 1rem;
+    margin: 0px;
+    padding: 0px;
+}
+
+.whole-window {
+    min-height: 100vh;
+    background-color: var(--global-background-color);
+}
+
+.display-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.position-fixed {
+    position: fixed;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.flex-wrap-enabled {
+    flex-wrap: wrap;
+}
+
+.text-default {
+    font-size: var(--global-font-size);
+    color: var(--global-text-color);
+    font-family: var(--global-font-family);
+}

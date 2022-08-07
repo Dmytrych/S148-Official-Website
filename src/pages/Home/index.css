@@ -6,10 +6,7 @@
 .title-page {
     z-index: 0;
     height: 90vh;
-    background: linear-gradient(
-        240.51deg,
-        #22ff004f 4.27%,
-        #07202CD9 114.23%);
+    background: var(--main-page-gradient);
 }
 
 .scratch-mark {
@@ -71,4 +68,9 @@
 .slogan {
     color: var(--title-unimportant-subtext-color);
     font-size: 1rem;
+}
+
+.main-page-block {
+    min-height: 100vh;
+    background: var(--main-page-gradient);
 }

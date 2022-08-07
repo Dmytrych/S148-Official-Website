@@ -15,3 +15,8 @@ body {
   font-family: 'Squares Bold';
   src: local('Squares Bold'), url(./fonts/Squares\ Bold.otf) format('opentype');
 }
+
+@font-face {
+  font-family: 'Montserrat Regular';
+  src: local('Montserrat Regular'), url(./fonts/Montserrat-Regular.otf) format('opentype');
+}

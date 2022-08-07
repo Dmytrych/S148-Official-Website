@@ -16,4 +16,11 @@
     --retro-column-color: rgba(74, 57, 77, 0.651);
     --retro-card-color-defalut: rgb(138, 77, 145);
     --retro-card-color-draft: rgb(122, 122, 122);
+
+    --main-page-gradient: linear-gradient(
+        240.51deg,
+        #22ff004f 4.27%,
+        #07202CD9 114.23%);
+
+    --error-color: rgb(197, 0, 0);
 }

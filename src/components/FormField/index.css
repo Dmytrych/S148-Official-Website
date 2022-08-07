@@ -1,0 +1,28 @@
+.form-field-input {
+    font-family: Montserrat Regular;
+    border-color: white;  
+    border-style:solid;
+    padding-left: 1rem;
+}
+
+.form-element-default {
+    height: 2.25rem;
+    width: 20rem;
+    border-radius: 4px;
+}
+
+.form-element-container {
+    display: flex;
+    flex-direction: column;
+    font-family: Montserrat Regular;
+}
+
+.form-element-error-text {
+    color: var(--error-color);
+    font-size: 0.7rem;
+}
+
+.form-element-header {
+    margin-bottom: 0.2rem;
+    font-size: 0.8rem;
+}

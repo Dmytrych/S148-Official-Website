@@ -22,5 +22,13 @@
         #22ff004f 4.27%,
         #07202CD9 114.23%);
 
+    --order-form-gradient: radial-gradient(
+        59.59% 160.1% at 42.67% 40.41%,
+        #22ff001b 10%,
+        #22ff005d 40%,
+        #07202CD9 100%);
+
+    --app-panel-back-color: #2960233c;
+
     --error-color: rgb(197, 0, 0);
 }

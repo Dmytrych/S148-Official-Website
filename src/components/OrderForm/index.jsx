@@ -15,7 +15,7 @@ function OrderForm() {
     });
 
       return (
-        <FormField placeholder='Text'/>
+        <FormField placeholder='Text' error errorText="asdasd" header="Test"/>
     
       );
 }

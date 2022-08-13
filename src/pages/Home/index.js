@@ -31,7 +31,34 @@ export default function Home() {
                 </div>
             </div>
             <div className='main-page-block'>
-                <OrderForm/>
+                <div className='product-display-container'>
+                    <div className="product-display">
+                        <div className='product-box'>
+                            <div className='product-image-container'>
+                                <img className='product-image' src={bottle}/>
+                            </div>
+                            <div className='product-button-container'>
+                                <RoundButton text={locale.buy}/>
+                            </div>
+                        </div>
+                        <div className='product-box'>
+                            <div className='product-image-container'>
+                                <img className='product-image' src={bottle}/>
+                            </div>
+                            <div className='product-button-container'>
+                                <RoundButton text={locale.buy}/>
+                            </div>
+                        </div>
+                        <div className='product-box'>
+                            <div className='product-image-container'>
+                                <img className='product-image' src={bottle}/>
+                            </div>
+                            <div className='product-button-container'>
+                                <RoundButton text={locale.buy}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

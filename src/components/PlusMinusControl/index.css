@@ -1,0 +1,12 @@
+.plus-minus-control {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.plus-minus-control-number {
+    width: 2rem;
+    text-align: center;
+}

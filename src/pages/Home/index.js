@@ -3,7 +3,9 @@ import OrderForm from '../../components/OrderForm';
 import scratch from './Vector.svg';
 import bottle from './pngwing 1.png'
 import { locale } from '../../locale/ua';
+import RoundedButton from '../../components/RoundedButton';
 import RoundButton from '../../components/RoundButton';
+import PlusMinusControl from '../../components/PlusMinusControl'
 import './index.css'
 
 export default function Home() {
@@ -23,7 +25,7 @@ export default function Home() {
                         {locale.universal_oil_detailed}
                     </div>
                     <div className='main-page-title-subtext buy-button'>
-                        <RoundButton text={locale.buy}/>
+                        <RoundedButton text={locale.buy}/>
                     </div>
                     <div className='main-page-title-subtext slogan'>
                         {locale.slogan}
@@ -38,7 +40,7 @@ export default function Home() {
                                 <img className='product-image' src={bottle}/>
                             </div>
                             <div className='product-button-container'>
-                                <RoundButton text={locale.buy}/>
+                                <PlusMinusControl/>
                             </div>
                         </div>
                         <div className='product-box'>
@@ -46,7 +48,7 @@ export default function Home() {
                                 <img className='product-image' src={bottle}/>
                             </div>
                             <div className='product-button-container'>
-                                <RoundButton text={locale.buy}/>
+                                <PlusMinusControl/>
                             </div>
                         </div>
                         <div className='product-box'>
@@ -54,9 +56,14 @@ export default function Home() {
                                 <img className='product-image' src={bottle}/>
                             </div>
                             <div className='product-button-container'>
-                                <RoundButton text={locale.buy}/>
+                                <PlusMinusControl/>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className='inblock-container'>
+                    <div className='middle-page-container'>
+                        <OrderForm/>
                     </div>
                 </div>
             </div>

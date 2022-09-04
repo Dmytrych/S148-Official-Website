@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     user-select: none;
+    width: 10rem;
 }
 
 .plus-minus-control-number {

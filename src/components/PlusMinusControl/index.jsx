@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
+import { getCities } from '../../repositories/novaPoshta';
 import RoundButton from '../RoundButton';
 import './index.css';
 
-function PlusMinusControl({ text }) {
+function PlusMinusControl() {
     const [counter, setCounter] = useState(0);
-    let increaseCounter = () => setCounter(counter + 1)
+    let increaseCounter = () => {setCounter(counter + 1); getCities();}
     let decreaseCounter = () => setCounter(counter - 1)
 
 

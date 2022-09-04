@@ -1,8 +1,8 @@
 .light-theme {
     --global-text-color: #e795da;
     --global-primary-title-size: 2rem;
-    --global-color-primary: #59315e;
-    --global-color-primary-highlight: #a150ac;
+    --global-color-primary: #70c963;
+    --global-color-primary-highlight: #34bd1f;
     --global-color-secondary: #779fa1;
     --global-color-warning: #e28413;
     --global-color-danger: #ff6542;
@@ -28,7 +28,10 @@
         #22ff005d 40%,
         #07202CD9 100%);
 
+    --product-card-color: #ffffff;
+
     --app-panel-back-color: #2960233c;
 
     --error-color: rgb(197, 0, 0);
+    --success-color: rgb(7, 197, 0);
 }

@@ -75,7 +75,7 @@
     background: var(--order-form-gradient);
 }
 
-.product-display-container {
+/* .product-display-container {
     display: flex;
     justify-content: center;
     padding-top: 4vh;
@@ -116,13 +116,7 @@
     flex-grow: 2;
     display: flex;
     align-items: center;
-}
-
-.inblock-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+} */
 
 .middle-page-container {
     width: 60vw;

@@ -1,0 +1,26 @@
+.products-page {
+    min-height: 90vh;
+    background: var(--order-form-gradient);
+}
+
+.products-page-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.products-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 85vh;
+    width: 70vw;
+    padding: 1rem;
+}
+
+.product-container {
+    background-color: var(--product-card-color);
+    flex-grow: 1;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}

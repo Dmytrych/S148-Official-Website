@@ -1,0 +1,4 @@
+.tall-product-card {
+    height: 80vh;
+    background-color: var(--product-card-color);
+}

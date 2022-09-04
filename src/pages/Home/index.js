@@ -32,7 +32,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className='main-page-block'>
+            {/* <div className='main-page-block'>
                 <div className='product-display-container'>
                     <div className="product-display">
                         <div className='product-box'>
@@ -66,7 +66,7 @@ export default function Home() {
                         <OrderForm/>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

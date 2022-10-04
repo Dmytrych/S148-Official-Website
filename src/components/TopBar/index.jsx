@@ -3,8 +3,9 @@ import logo from './S148.png'
 import { Button, ButtonGroup } from '@mui/material';
 import { locale } from '../../locale/ua';
 import './index.css';
+import { noop } from '../../utils';
 
-function NavButton(onClick) {
+function NavButton({onClick = noop}) {
     return (
         <div onClick={onClick} className='nav-button-box'>
             <span className='nav-button-text'>Waaaasagh</span>

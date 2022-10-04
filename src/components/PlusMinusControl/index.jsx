@@ -1,24 +1,19 @@
-import React, { useContext, useState } from 'react';
-import { getCities } from '../../repositories/novaPoshta';
+import React from 'react';
+import { noop } from '../../utils';
 import RoundButton from '../RoundButton';
 import './index.css';
 
-function PlusMinusControl() {
-    const [counter, setCounter] = useState(0);
-    let increaseCounter = () => {setCounter(counter + 1); getCities();}
-    let decreaseCounter = () => setCounter(counter - 1)
-
-
+function PlusMinusControl({decreaseButtonClick = noop, increaseButtonClick = noop, value}) {
     return (
         <div className='plus-minus-control'>
             <div>
-                <RoundButton text="-" onClick={decreaseCounter}/>
+                <RoundButton text="-" onClick={() => decreaseButtonClick()}/>
             </div>
             <div className='plus-minus-control-number'>
-                {counter}
+                {value}
             </div>
             <div>
-                <RoundButton text="+" onClick={increaseCounter}/>
+                <RoundButton text="+" onClick={() => increaseButtonClick()}/>
             </div>
         </div>
     );

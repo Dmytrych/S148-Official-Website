@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
+import { noop } from '../../utils';
 import './index.css';
 
-function RoundedButton({ text, size = 'big', type = 'normal' }) {
+function RoundedButton({ text, size = 'big', type = 'normal', onClick = noop }) {
       const sizeCss = size == 'big' ? 'rounded-button-big' : 'rounded-button-small'
       let typeCss;
       switch (type) {
@@ -14,7 +15,7 @@ function RoundedButton({ text, size = 'big', type = 'normal' }) {
       }
 
       return (
-        <div className={`rounded-button ${sizeCss} ${typeCss}`}>
+        <div className={`rounded-button ${sizeCss} ${typeCss}`} onClick={onClick}>
             {text}
         </div>
       );

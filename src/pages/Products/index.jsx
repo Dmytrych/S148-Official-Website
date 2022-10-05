@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TallProductCard from '../../components/TallProductCard'
-import { getAllProducts } from '../../repositories/products';
+import { getAllProducts } from '../../repositories/api/index';
 import './index.css'
 
 export default function Products(){

@@ -12,5 +12,11 @@ export const locale = {
     buy: "Купити",
     order: "Замовити",
     slogan: "Ідея народжена в барі, розроблена в академії наук",
-    in_your_cart: "У вашому кошику"
+    in_your_cart: "У вашому кошику",
+    
+    home_page: "Головна",
+    products_page: "Продукти",
+    cart_page: "Кошик",
+    
+    total: "Разом"
 }

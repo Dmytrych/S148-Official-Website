@@ -1,6 +1,7 @@
 .products-page {
     min-height: 90vh;
-    background: var(--order-form-gradient);
+    border-top: 2px solid black;
+    background: white;
 }
 
 .products-page-block {
@@ -12,10 +13,8 @@
 .products-display {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    height: 85vh;
+    justify-content: space-between;
     width: 70vw;
-    padding: 1rem;
 }
 
 .product-container {

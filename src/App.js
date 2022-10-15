@@ -4,11 +4,13 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Order from "./pages/Order";
 import WrapperPage from "./pages/WrapperPage";
-import "./App.css"
 import TopBar from "./components/TopBar";
 import Products from "./pages/Products";
 import CartContext from "./contexts/CartContext";
 import { setLocalCart, getLocalCart } from "./repositories/cartRepository";
+import Cart from "./pages/Cart";
+import "./App.css"
+import "./styles/shared.css"
 
 function App() {
   const [cart, setCart] = useState({});
@@ -37,6 +39,7 @@ function App() {
               <Route path="/" element={<Home/>} />
               <Route path="/order" element={<Order/>} />
               <Route path="/products" element={<Products/>} />
+              <Route path="/cart" element={<Cart/>} />
             </Routes>
           </WrapperPage>
         </CartContext.Provider>

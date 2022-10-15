@@ -4,14 +4,8 @@ import { Button, ButtonGroup } from '@mui/material';
 import { locale } from '../../locale/ua';
 import './index.css';
 import { noop } from '../../utils';
-
-function NavButton({onClick = noop}) {
-    return (
-        <div onClick={onClick} className='nav-button-box'>
-            <span className='nav-button-text'>Waaaasagh</span>
-        </div>
-    )
-}
+import NavButton from '../NavButton';
+import { NavLink } from 'react-router-dom';
 
 function TopBar() { 
 
@@ -24,13 +18,13 @@ function TopBar() {
             </div>
             <div className='item-menu'>
                 <div className="top-bar-item">
-                    <NavButton/>
+                    <NavLink to="/">{locale.home_page}</NavLink>
                 </div>
                 <div className="top-bar-item">
-                    <NavButton/>
+                    <NavLink to="/products">{locale.products_page}</NavLink>
                 </div>
                 <div className="top-bar-item">
-                    <NavButton/>
+                    <NavLink to="/cart">{locale.cart_page}</NavLink>
                 </div>
                 <div className="top-bar-item">
                     <NavButton/>

@@ -4,7 +4,8 @@ import { locale } from '../../locale/ua';
 import { getLocalCart } from '../../repositories/cartRepository';
 import PlusMinusControl from '../PlusMinusControl';
 import RoundedButton from '../RoundedButton';
-import './index.css'
+import bottleImage from './bottle.png';
+import './index.css';
 
 const defaultProductQuantity = 1
 
@@ -22,7 +23,7 @@ function TallProductCard({className, product}) {
         }
         else {
             cartContext.cart[product.id] = {
-                id: product.id,
+                ...product,
                 quantity: quantity
             }
         }
@@ -31,11 +32,18 @@ function TallProductCard({className, product}) {
     }
 
     return (<div className={`tall-product-card ${className}`}>
-        <h6>{product.name}</h6>
-        <PlusMinusControl value={quantity} decreaseButtonClick={decreaseButtonClick} increaseButtonClick={increaseButtonClick}/>
-        <h6>{product.unitPrice * quantity}</h6>
-        <h6>{locale.in_your_cart}:{cartContext.cart[product.id].quantity ?? 0}</h6>
-        <RoundedButton text={locale.buy} onClick={updateCart}/>
+        <div className='product-title-image-box'>
+            <img src={bottleImage}/>
+        </div>
+        <span className='product-name-text'>{product.name}</span>
+        {/* <div>
+            <span>{locale.in_your_cart}:{cartContext.cart[product.id].quantity ?? 0}</span>
+            <PlusMinusControl value={quantity} decreaseButtonClick={decreaseButtonClick} increaseButtonClick={increaseButtonClick}/>
+        </div> */}
+        <div className='product-price-box'>
+            <span className='product-price-tag'>{product.unitPrice * quantity} ₴</span>
+            <RoundedButton text={locale.buy} onClick={updateCart}/>
+        </div>
     </div>)
 }
 

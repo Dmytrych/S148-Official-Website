@@ -1,0 +1,29 @@
+.order-page {
+    display: flex;
+    justify-content: center;
+    min-height: 90vh;
+    background: var(--order-form-gradient);
+}
+
+.order-page-content {
+    display: flex;
+    flex-direction: row;
+    width: 70vw;
+}
+
+.order-summary-block {
+    flex-grow: 1;
+}
+
+.order-summary {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--order-page-summary-block-color);
+    padding: 20px 40px;
+}
+
+.order-page-content-block {
+    flex-grow: 2;
+    background-color: var(--order-page-content-block-color);
+    padding: 19px 32px;
+}

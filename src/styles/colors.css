@@ -1,6 +1,9 @@
 .light-theme {
+    font-size: var(--global-text-size);
+
     --global-text-color: #e795da;
     --global-primary-title-size: 2rem;
+    --global-text-size: 1em;
     --global-color-primary: #70c963;
     --global-color-primary-highlight: #34bd1f;
     --global-color-secondary: #779fa1;
@@ -13,10 +16,6 @@
     --title-text-shadow-color: #ffffff;
     --title-unimportant-subtext-color: rgba(255, 255, 255, 0.5);;
 
-    --retro-column-color: rgba(74, 57, 77, 0.651);
-    --retro-card-color-defalut: rgb(138, 77, 145);
-    --retro-card-color-draft: rgb(122, 122, 122);
-
     --main-page-gradient: linear-gradient(
         240.51deg,
         #22ff004f 4.27%,
@@ -28,7 +27,10 @@
         #22ff005d 40%,
         #07202CD9 100%);
 
-    --product-card-color: #ffffff;
+    --order-page-content-block-color: #ffffff;
+    --order-page-summary-block-color: rgba(217, 217, 217, 0.36);;
+
+    --product-card-color: #e7e7e7;
 
     --app-panel-back-color: #2960233c;
 

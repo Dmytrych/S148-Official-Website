@@ -18,5 +18,7 @@ export const locale = {
     products_page: "Продукти",
     cart_page: "Кошик",
     
-    total: "Разом"
+    total: "Разом",
+    to_be_paid: "До сплати",
+    order_placement: "Оформлення замовлення"
 }

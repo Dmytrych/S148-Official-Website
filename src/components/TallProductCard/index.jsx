@@ -13,21 +13,16 @@ const defaultProductQuantity = 1
 function TallProductCard({className, product}) {
     const cartContext = useContext(CartContext)
 
-    const [quantity, setQuantity] = useState(defaultProductQuantity)
-    const decreaseButtonClick = () => { quantity > 0 && setQuantity(quantity - 1) }
-    const increaseButtonClick = () => setQuantity(quantity + 1)
-
     const updateCart = () => {
         if(cartContext.cart[product.id]){
-            cartContext.cart[product.id].quantity += quantity
+            cartContext.cart[product.id].quantity += 1
         }
         else {
             cartContext.cart[product.id] = {
                 ...product,
-                quantity: quantity
+                quantity: defaultProductQuantity
             }
         }
-        setQuantity(defaultProductQuantity)
         cartContext.saveCart({...cartContext.cart})
     }
 
@@ -41,7 +36,7 @@ function TallProductCard({className, product}) {
             <PlusMinusControl value={quantity} decreaseButtonClick={decreaseButtonClick} increaseButtonClick={increaseButtonClick}/>
         </div> */}
         <div className='product-price-box'>
-            <span className='product-price-tag'>{product.unitPrice * quantity} ₴</span>
+            <span className='product-price-tag'>{product.unitPrice}₴</span>
             <RoundedButton text={locale.buy} onClick={updateCart}/>
         </div>
     </div>)

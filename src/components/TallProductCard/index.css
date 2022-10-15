@@ -7,10 +7,6 @@
     background-color: var(--product-card-color);
 }
 
-.product-price-tag {
-    font-size: 1.8em;
-}
-
 .product-price-box {
     width: 100%;
     display: flex;

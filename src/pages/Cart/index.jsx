@@ -4,7 +4,15 @@ import { locale } from '../../locale/ua';
 import './index.css'
 
 function Cart(){
+    const [products, setProducts] = useState([])
     const cartContext = useContext(CartContext)
+    
+    useEffect(() => {
+        const cartEntries = Object.entries(cartContext.cart);
+        if(cartEntries && cartEntries.length > 0){
+            setProducts(cartEntries.map(getProductValue))
+        }
+      }, [cartContext.cart]);
 
     return (<div className='order-page'>
         <div className='order-page-content'>
@@ -15,18 +23,39 @@ function Cart(){
             </div>
             <div className='order-summary-block'>
                 <div className='order-summary'>
-                    <span>{locale.total}</span>
+                    <h2>{locale.total}</h2>
                     <div>
-                        {cartContext.cart.map(product => {
-                            <div key={product.id}>
-                                {product.quantity}x {product.name}
+                        {products.map(product => {
+                            return <div key={product.id} className='order-product-summary-line'>
+                                <div>
+                                    {product.quantity}x {product.name}
+                                </div>
+                                <div>
+                                    {product.quantity * product.unitPrice}₴
+                                </div>
                             </div>
                         })}
+                    </div>
+                    <div className='order-total-cost-line'>
+                        <div>
+                            {locale.to_be_paid}
+                        </div>
+                        <div>
+                            {products.reduce((acc, product) => acc + (product.unitPrice * product.quantity), 0)}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>)
+}
+
+const getProductValue = (productKeyValue) => {
+    return productKeyValue[1]
+}
+
+const getProductId = (productKeyValue) => {
+    return productKeyValue[0]
 }
 
 export default Cart;

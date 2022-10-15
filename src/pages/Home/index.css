@@ -1,4 +1,5 @@
 .main-frame {
+    font-family: var(--main-page-font-family);
     min-height: 90vh;
     width: 100%;
 }

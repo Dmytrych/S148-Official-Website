@@ -1,9 +1,11 @@
 .light-theme {
     font-size: var(--global-text-size);
+    font-family: var(--global-font-family);
 
+    --global-font-family: 'IBMPlexSans Regular';
     --global-text-color: #e795da;
     --global-primary-title-size: 2rem;
-    --global-text-size: 1em;
+    --global-text-size: 20px;
     --global-color-primary: #70c963;
     --global-color-primary-highlight: #34bd1f;
     --global-color-secondary: #779fa1;
@@ -16,6 +18,7 @@
     --title-text-shadow-color: #ffffff;
     --title-unimportant-subtext-color: rgba(255, 255, 255, 0.5);;
 
+    --main-page-font-family: 'Squares Bold';
     --main-page-gradient: linear-gradient(
         240.51deg,
         #22ff004f 4.27%,
@@ -28,7 +31,10 @@
         #07202CD9 100%);
 
     --order-page-content-block-color: #ffffff;
-    --order-page-summary-block-color: rgba(217, 217, 217, 0.36);;
+    --order-page-summary-block-color: rgba(217, 217, 217, 0.36);
+    --order-page-highlight-font-weight: 600;
+    --order-page-default-font-weight: 400;
+    --order-delimiter-style: 1px solid black;
 
     --product-card-color: #e7e7e7;
 

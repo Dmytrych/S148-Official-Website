@@ -1,5 +1,4 @@
 body {
-  font-family: "Squares Bold";
   margin: 0;
   padding: 0;
 }
@@ -19,4 +18,14 @@ body {
 @font-face {
   font-family: 'Montserrat Regular';
   src: local('Montserrat Regular'), url(./fonts/Montserrat-Regular.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'IBMPlexSans Regular';
+  src: local('IBMPlexSans Regular'), url(./fonts/IBMPlexSans-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'IBMPlexSans Bold';
+  src: local('IBMPlexSans Bold'), url(./fonts/IBMPlexSans-Bold.ttf) format('truetype');
 }

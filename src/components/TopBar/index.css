@@ -16,6 +16,7 @@
 }
 
 .top-bar {
+    font-family: 'Squares Bold';
     background-color: var(--navbar-background-color);
     display: flex;
     align-items: center;

@@ -5,6 +5,10 @@ body {
     padding: 0px;
 }
 
+.product-price-tag {
+    font-size: 1.5em;
+}
+
 .whole-window {
     min-height: 100vh;
     background-color: var(--global-background-color);

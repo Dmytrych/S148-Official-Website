@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import logo from './S148.png'
+import logo from '../../imgShared/S148.png'
 import { Button, ButtonGroup } from '@mui/material';
 import { locale } from '../../locale/ua';
 import './index.css';

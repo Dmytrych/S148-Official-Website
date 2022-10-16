@@ -15,33 +15,34 @@ function Cart(){
       }, [cartContext.cart]);
 
     return (<div className='order-page'>
-        <div className='order-page-content'>
-            <div className='order-page-content-block'>
-                <div className=''>
-                    asdasdasd
+        <div className='order-page-caption'>
+            <div><h2>{locale.order_placement}</h2></div>
+            <div className='order-page-content'>
+                <div className='order-page-content-block'>
+                    Тут буде форма замовлень
                 </div>
-            </div>
-            <div className='order-summary-block'>
-                <div className='order-summary'>
-                    <h2>{locale.total}</h2>
-                    <div>
-                        {products.map(product => {
-                            return <div key={product.id} className='order-product-summary-line'>
-                                <div>
-                                    {product.quantity}x {product.name}
-                                </div>
-                                <div>
-                                    {product.quantity * product.unitPrice}₴
-                                </div>
-                            </div>
-                        })}
-                    </div>
-                    <div className='order-total-cost-line'>
+                <div className='order-summary-block'>
+                    <div className='order-summary'>
+                        <h2>{locale.total}</h2>
                         <div>
-                            {locale.to_be_paid}
+                            {products.map(product => {
+                                return <div key={product.id} className='order-product-summary-line'>
+                                    <div>
+                                        {product.quantity}x {product.name}
+                                    </div>
+                                    <div>
+                                        {product.quantity * product.unitPrice}₴
+                                    </div>
+                                </div>
+                            })}
                         </div>
-                        <div>
-                            {products.reduce((acc, product) => acc + (product.unitPrice * product.quantity), 0)}
+                        <div className='order-total-cost-line'>
+                            <div>
+                                {locale.to_be_paid}
+                            </div>
+                            <div>
+                                {products.reduce((acc, product) => acc + (product.unitPrice * product.quantity), 0)}
+                            </div>
                         </div>
                     </div>
                 </div>

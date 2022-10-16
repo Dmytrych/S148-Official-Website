@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     height: 80vh;
+    width: 20rem;
     padding: 10px;
     background-color: var(--product-card-color);
 }
@@ -18,7 +19,7 @@
 .product-name-text {
     display: block;
     overflow: hidden;
-    white-space: nowrap;
+    word-break: break-all;
     text-overflow: ellipsis;
     margin-top: 1em;
     margin-bottom: 1em;

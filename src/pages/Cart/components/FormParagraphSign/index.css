@@ -1,0 +1,21 @@
+.form-paragraph-sign {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-paragraph-circle-number {
+    width: 20px;
+    height: 20px;
+    background-color: var(--form-paragraph-dot-color);
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #6F7482;
+}
+
+.form-paragraph-text {
+    font-weight: bold;
+}

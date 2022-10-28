@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
+import FormField from '../../components/FormField';
 import CartContext from '../../contexts/CartContext';
 import { locale } from '../../locale/ua';
+import FormParagraphSign from './components/FormParagraphSign';
 import './index.css'
 
 function Cart(){
@@ -19,7 +21,25 @@ function Cart(){
             <div><h2>{locale.order_placement}</h2></div>
             <div className='order-page-content'>
                 <div className='order-page-content-block'>
-                    Тут буде форма замовлень
+                    <div><FormParagraphSign numberTag={0} text='asdasd'/></div>
+                    <div className='flex-column'>
+                        <div className='credentials-block'>
+                            <div className='form-field'>
+                                <FormField header="Name"/>
+                            </div>
+                            <div className='form-field'>
+                                <FormField header="Name"/>
+                            </div>
+                        </div>
+                        <div className='credentials-block'>
+                        <div className='form-field'>
+                                <FormField header="Name"/>
+                            </div>
+                            <div className='form-field'>
+                                <FormField header="Name"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className='order-summary-block'>
                     <div className='order-summary'>
@@ -41,7 +61,7 @@ function Cart(){
                                 {locale.to_be_paid}
                             </div>
                             <div>
-                                {products.reduce((acc, product) => acc + (product.unitPrice * product.quantity), 0)}
+                                {products.reduce((acc, product) => acc + (product.unitPrice * product.quantity), 0)}₴
                             </div>
                         </div>
                     </div>

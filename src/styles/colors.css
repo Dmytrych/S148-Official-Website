@@ -13,10 +13,12 @@
     --global-color-danger: #ff6542;
     --global-background-color: #339557;
 
+    --form-paragraph-dot-color: #D9D9D9;
+
     --navbar-background-color: #ffffff;
 
     --title-text-shadow-color: #ffffff;
-    --title-unimportant-subtext-color: rgba(255, 255, 255, 0.5);;
+    --title-unimportant-subtext-color: rgba(255, 255, 255, 0.5);
 
     --main-page-font-family: 'Squares Bold';
     --main-page-gradient: linear-gradient(

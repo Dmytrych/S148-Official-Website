@@ -11,6 +11,30 @@
     width: 70vw;
 }
 
+.credentials-block {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 900px) {
+    .order-page-content {
+        display: flex;
+        flex-direction: column;
+        width: 70vw;
+    }
+
+    .credentials-block {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.form-field {
+    margin-top: 5px;
+    margin-right: 10px;
+    flex-grow: 1;
+}
+
 .order-summary-block {
     flex: 1;
     font-weight: var(--order-page-highlight-font-weight);
@@ -20,6 +44,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.price-tag {
     word-break: break-all;
 }
 

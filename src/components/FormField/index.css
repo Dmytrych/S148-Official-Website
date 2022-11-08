@@ -1,21 +1,16 @@
 .form-field-input {
-    font-family: Montserrat Regular;
-    border-color: black;  
+    border-color: var(--form-field-outline-color);  
     border-width: 2px;
     border-style: solid;
     padding-left: 1rem;
-}
-
-.form-element-default {
     height: 2.25rem;
     border-radius: 4px;
+    font-weight: 400;
 }
 
 .form-element-container {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    font-family: Montserrat Regular;
 }
 
 .form-element-error-text {

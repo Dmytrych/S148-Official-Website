@@ -5,13 +5,15 @@
     --global-font-family: 'IBMPlexSans Regular';
     --global-text-color: #e795da;
     --global-primary-title-size: 2rem;
-    --global-text-size: 20px;
+    --global-text-size: 14px;
     --global-color-primary: #70c963;
     --global-color-primary-highlight: #34bd1f;
     --global-color-secondary: #779fa1;
     --global-color-warning: #e28413;
     --global-color-danger: #ff6542;
     --global-background-color: #339557;
+
+    --form-field-outline-color: #779fa1;
 
     --form-paragraph-dot-color: #D9D9D9;
 
@@ -32,7 +34,7 @@
         #22ff005d 40%,
         #07202CD9 100%);
 
-    --order-page-content-block-color: #ffffff;
+    --order-page-content-block-color: rgb(255, 255, 255);
     --order-page-summary-block-color: rgba(217, 217, 217, 0.36);
     --order-page-highlight-font-weight: 600;
     --order-page-default-font-weight: 400;

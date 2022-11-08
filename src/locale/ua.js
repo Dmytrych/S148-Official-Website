@@ -1,12 +1,14 @@
 export const locale = {
     email: "E-mail адреса",
+    email_placeholder: "samplemail@gmail.com",
     name: "Ім'я",
-    name_placeholder: "Іван",
+    name_placeholder: "Валерій",
     surname: "Прізвище",
-    surname_placeholder: "Петренко",
+    surname_placeholder: "Залужний",
     middle_name: "По-батькові",
-    middle_name_placeholder: "Іванович",
+    middle_name_placeholder: "Федорович",
     phone_number: "Номер телефону",
+    phone_number_placeholder: "+380731836150",
     universal_oil: "Універсальне мастило",
     universal_oil_detailed: "Збройове мастило для очистки й догляду",
     buy: "Купити",
@@ -20,5 +22,6 @@ export const locale = {
     
     total: "Разом",
     to_be_paid: "До сплати",
-    order_placement: "Оформлення замовлення"
+    order_placement: "Оформлення замовлення",
+    contact_info: "Контактні дані"
 }

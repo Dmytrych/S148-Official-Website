@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react'
 import FormField from '../../components/FormField';
 import CartContext from '../../contexts/CartContext';
@@ -21,22 +22,23 @@ function Cart(){
             <div><h2>{locale.order_placement}</h2></div>
             <div className='order-page-content'>
                 <div className='order-page-content-block'>
-                    <div><FormParagraphSign numberTag={0} text='asdasd'/></div>
-                    <div className='flex-column'>
-                        <div className='credentials-block'>
-                            <div className='form-field'>
-                                <FormField header="Name"/>
-                            </div>
-                            <div className='form-field'>
-                                <FormField header="Name"/>
+                    <div><FormParagraphSign numberTag={0} text={locale.contact_info}/></div>
+                    <div className='order-page-content-info-block'>
+                        <div className='flex-column'>
+                            <div className='credentials-block'>
+                                <FormField header={locale.name} className="form-field" placeholder={locale.name_placeholder}/>
+                                <FormField header={locale.middle_name} className="form-field" placeholder={locale.middle_name_placeholder}/>
+                                <FormField header={locale.surname} className="form-field" placeholder={locale.surname_placeholder}/>
+                                <FormField header={locale.email} className="form-field" placeholder={locale.email_placeholder}/>
+                                <FormField header={locale.phone_number} className="form-field" placeholder={locale.phone_number_placeholder}/>
+
                             </div>
                         </div>
-                        <div className='credentials-block'>
-                        <div className='form-field'>
-                                <FormField header="Name"/>
-                            </div>
-                            <div className='form-field'>
-                                <FormField header="Name"/>
+                    </div>
+                    <div className='order-page-content-info-block-outlined'>
+                        <div className='flex-column'>
+                            <div className='credentials-block'>
+                                <FormField header="Name" className="form-field"/>
                             </div>
                         </div>
                     </div>

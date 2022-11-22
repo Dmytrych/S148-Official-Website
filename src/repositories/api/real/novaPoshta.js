@@ -1,6 +1,9 @@
-import {GET, fetchFrom, POST} from './apiRequestUtils'
+import {GET, fetchFrom} from './apiRequestUtils'
 
-export function getCities(){
-    fetchFrom("/TestApi/Test", POST);
+const controllerName = "DeliveryInfoApi"
+const actionName = "GetCities"
+
+export function getCities(filter){
+    return fetchFrom(`/${controllerName}/${actionName}?nameFilter=${filter}`, GET);
 }
 

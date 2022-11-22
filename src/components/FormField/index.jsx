@@ -1,11 +1,14 @@
 import React from "react";
+import { noop } from "../../utils";
 import './index.css'
 
-const FormField = ({header = "", error = false, errorText = "", placeholder = "", className = "",onChange}) => {
+const FormField = ({label = "", error = false, value = "", errorText = "", className = "", ...props}) => {
     return (
         <div className={`form-element-container ${className}`}>
-            <span className="form-element-header">{header}</span>
-            <input className="form-element-default form-field-input" type="text" placeholder={placeholder} onChange={onChange}/>
+            {label ? <span className="form-element-header">{label}</span> : <></>}
+            <div className="form-field-input-outlined">
+                <input className="form-field-internal-input" type="text" {...props}/>
+            </div>
             {error ? <span className="form-element-error-text">{errorText}</span> : <></>}
         </div>
     )

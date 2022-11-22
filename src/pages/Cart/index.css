@@ -11,11 +11,6 @@
     width: 70vw;
 }
 
-.credentials-block {
-    display: flex;
-    flex-direction: column;
-}
-
 @media screen and (max-width: 900px) {
     .order-page-content {
         display: flex;
@@ -24,19 +19,9 @@
     }
 }
 
-.form-field {
-    margin-top: 30px;
-}
-
 .order-summary-block {
     flex: 1;
     font-weight: var(--order-page-highlight-font-weight);
-}
-
-.order-product-summary-line {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 
 .price-tag {
@@ -48,39 +33,9 @@
     flex-direction: column;
 }
 
-.order-total-cost-line {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 50px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-top: var(--order-delimiter-style);
-    border-bottom: var(--order-delimiter-style);
-}
-
-.order-summary {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--order-page-summary-block-color);
-    padding: 20px 40px;
-}
-
 .order-page-content-block {
     flex: 2;
     background-color: var(--order-page-content-block-color);
     padding: 19px 32px;
     word-break: break-all;
-}
-
-.order-page-content-info-block {
-    margin-left: 2rem;
-    padding: 20px 15px;
-}
-
-.order-page-content-info-block-outlined{
-    margin-left: 2rem;
-    padding: 20px 15px;
-    border: 2px solid var(--global-color-primary);
-    border-radius: 5px;
 }

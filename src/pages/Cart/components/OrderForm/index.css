@@ -1,0 +1,20 @@
+.order-page-content-info-block {
+    margin-left: 2rem;
+    padding: 20px 15px;
+}
+
+.order-page-content-info-block-outlined{
+    margin-left: 2rem;
+    padding: 20px 15px;
+    border: 2px solid var(--global-color-primary);
+    border-radius: 5px;
+}
+
+.credentials-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field {
+    margin-top: 30px;
+}

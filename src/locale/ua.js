@@ -23,5 +23,6 @@ export const locale = {
     total: "Разом",
     to_be_paid: "До сплати",
     order_placement: "Оформлення замовлення",
-    contact_info: "Контактні дані"
+    contact_info: "Контактні дані",
+    city: "Місто"
 }

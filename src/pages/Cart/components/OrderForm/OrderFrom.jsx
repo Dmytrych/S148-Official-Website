@@ -2,10 +2,9 @@ import React from 'react'
 import { locale } from '../../../../locale/ua';
 import FormParagraphSign from '../FormParagraphSign';
 import FormField from '../../../../components/FormField';
-import './index.css'
-import CustomAutocomplete from '../../../../components/CustomAutocomplete';
 import { getCities } from '../../../../repositories/api/fake/novaPoshta';
-import CityAutocomplete from '../../../../components/CityAutocomplete';
+import CityAutocomplete from '../CityAutocomplete';
+import './index.css';
 
 function OrderForm(){
     const cities = getCities("К")

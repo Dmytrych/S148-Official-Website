@@ -14,3 +14,5 @@ export const init = init => state => ({ ...state, init });
 export const loading = loading => state => ({ ...state, loading });
 export const success = success => state => ({ ...state, success });
 export const error = error => state => ({ ...state, error });
+
+export const sleep = miliseconds => new Promise(resolve => setTimeout(resolve, miliseconds))

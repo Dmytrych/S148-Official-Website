@@ -1,3 +1,5 @@
+import { loading } from "../utils";
+
 export const locale = {
     email: "E-mail адреса",
     email_placeholder: "samplemail@gmail.com",
@@ -24,5 +26,8 @@ export const locale = {
     to_be_paid: "До сплати",
     order_placement: "Оформлення замовлення",
     contact_info: "Контактні дані",
-    city: "Місто"
+    city: "Місто",
+
+    loading: "Завантаження...",
+    no_matches_found: "Співпадінь не знайдено."
 }

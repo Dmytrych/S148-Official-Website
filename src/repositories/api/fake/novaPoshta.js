@@ -1,4 +1,7 @@
-export function getCities(filter){
+import { sleep } from "../../../utils"
+
+export async function getCities(filter){
+    await sleep(1000)
     return Promise.resolve(fakeCities.filter(city => city.description.includes(filter)))
 }
 

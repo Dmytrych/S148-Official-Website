@@ -2,13 +2,11 @@ import React from 'react'
 import { locale } from '../../../../locale/ua';
 import FormParagraphSign from '../FormParagraphSign';
 import FormField from '../../../../components/FormField';
-import { getCities } from '../../../../repositories/api/fake/novaPoshta';
 import CityAutocomplete from '../CityAutocomplete';
+import WarehouseAutocomplete from '../WarehouseAutocomplete';
 import './index.css';
 
 function OrderForm(){
-    const cities = getCities("К")
-
     return (
         <>
             <div><FormParagraphSign numberTag={0} text={locale.contact_info} /></div>
@@ -27,6 +25,7 @@ function OrderForm(){
                 <div className='flex-column'>
                     <div className='credentials-block'>
                         <CityAutocomplete />
+                        <WarehouseAutocomplete />
                     </div>
                 </div>
             </div>

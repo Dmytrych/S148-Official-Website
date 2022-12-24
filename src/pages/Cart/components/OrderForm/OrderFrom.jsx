@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { locale } from '../../../../locale/ua';
 import FormParagraphSign from '../FormParagraphSign';
 import FormField from '../../../../components/FormField';
@@ -7,6 +7,11 @@ import WarehouseAutocomplete from '../WarehouseAutocomplete';
 import './index.css';
 
 function OrderForm(){
+    const [citySelection, setCitySelection] = useState({
+        name: "",
+        cityGuidRef: ""
+    });
+
     return (
         <>
             <div><FormParagraphSign numberTag={0} text={locale.contact_info} /></div>
@@ -24,8 +29,8 @@ function OrderForm(){
             <div className='order-page-content-info-block-outlined'>
                 <div className='flex-column'>
                     <div className='credentials-block'>
-                        <CityAutocomplete />
-                        <WarehouseAutocomplete />
+                        <CityAutocomplete setCitySelection={setCitySelection}/>
+                        <WarehouseAutocomplete cityName={citySelection.name} cityGuidRef={citySelection.cityGuidRef}/>
                     </div>
                 </div>
             </div>

@@ -13,6 +13,7 @@ function CustomAutocomplete(
         userInputSerchStartDelay = 500,
         getOptions = async (_) => {},
         getOptionLabel = noop,
+        onChange = noop,
         ...props
     }) {
     const [filterValue, setFilterValue] = useState("")
@@ -43,6 +44,7 @@ function CustomAutocomplete(
     return (
         <Autocomplete
             {...props}
+            onChange={onChange}
             disablePortal
             options={options}
             renderInput={(params) => <TextField {...params} label={label} variant="filled" />}

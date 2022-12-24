@@ -20,5 +20,7 @@ export async function fetchFrom(urlPostfix, method, data) {
         request.body = JSON.stringify(data)
     }
 
-    return (await fetch(backendUrl + urlPostfix, request)).json()
+    let response = await fetch(backendUrl + urlPostfix, request)
+
+    return response.ok ? response.json() : undefined
 }

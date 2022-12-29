@@ -1,0 +1,7 @@
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}

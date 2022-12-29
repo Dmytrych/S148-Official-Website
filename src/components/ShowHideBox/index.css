@@ -1,0 +1,21 @@
+.show-hide-box-caption {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.show-hide-box {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid var(--global-color-inactive);
+    border-radius: 5px;
+}
+
+.show-hide-box-selected {
+    border: 2px solid var(--global-color-primary);
+    border-radius: 5px;
+}

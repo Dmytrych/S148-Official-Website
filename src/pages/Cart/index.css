@@ -34,7 +34,7 @@
 }
 
 .order-page-content-block {
-    flex: 2;
+    flex: 3;
     background-color: var(--order-page-content-block-color);
     padding: 19px 32px;
     word-break: break-all;

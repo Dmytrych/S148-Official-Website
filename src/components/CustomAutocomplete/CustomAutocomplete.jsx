@@ -12,7 +12,7 @@ function CustomAutocomplete(
         noOptionsText = "No options",
         userInputSerchStartDelay = 500,
         getOptions = async (_) => {},
-        getOptionLabel = noop,
+        getOptionLabel = noop,  
         onChange = noop,
         ...props
     }) {

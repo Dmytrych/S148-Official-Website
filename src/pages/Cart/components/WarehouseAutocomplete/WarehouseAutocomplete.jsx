@@ -2,7 +2,7 @@ import CustomAutocomplete from '../../../../components/CustomAutocomplete';
 import { locale } from '../../../../locale/ua';
 import { getWarehouseByNumber } from '../../../../repositories/api';
 
-const minStringLength = 1;
+const minStringLength = 1
 const loadingText = locale.loading
 const no_warehouses_found_text = locale.no_matches_found
 
@@ -17,13 +17,11 @@ function WarehouseAutocomplete({cityName, cityGuidRef}) {
                 if(isNaN(warehouseNumber)){
                     return Promise.resolve([])
                 }
-
                 const warehouse = await getWarehouseByNumber(cityName, cityGuidRef, warehouseNumber);
-
                 return warehouse ? [warehouse] : Promise.resolve([])
             }}
             noOptionsText={no_warehouses_found_text}
-            label={locale.city}
+            label={locale.warehouse}
             getOptionLabel={getOptionLabel} />
     )
 }

@@ -7,9 +7,12 @@ export async function getCities(filter) {
 
 export async function getWarehouseByNumber(cityName, cityRef, warehouseNumber) {
     await sleep(1000)
-    console.log(warehouseNumber);
     let warehouse = fakeWarehouses.find(fakeWarehouse => fakeWarehouse.warehouseNumber.toString() === warehouseNumber)
-    console.log(warehouse)
+
+    if(!warehouse){
+        return Promise.resolve(undefined)
+    }
+
     return Promise.resolve({
         name: warehouse.name,
         warehouseGuidRef: warehouse.warehouseGuidRef

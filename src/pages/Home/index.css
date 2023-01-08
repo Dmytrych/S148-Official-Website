@@ -10,26 +10,33 @@
     background: var(--main-page-gradient);   
 }
 
-.scratch-mark {
-    z-index: 1;
-    position: absolute;
-    transform: rotate(-4deg);
-    height: 100vh;
-    left: 15vw;
-    top: -3vh;
+.scratch-image-container{
+    overflow: hidden;
+    height: 90vh;
+    max-height: 100vh;
+    position: relative;
 }
 
-.bottles {
+.scratch-mark {
+    /* z-index: 1;
+    position: relative;
+    transform: rotate(-4deg);
+    height: 100vh;
+    z-index: 1;
+    left: 15vw; */
+    display: block;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    height: 60vh;
-    top: 30vh;
-    left: 60vw;
+    bottom: 0;
 }
 
 .big-bottle {
-    position: relative;
+    position: absolute;
     object-fit: cover;
-    height: 100%;
+    max-width: 25vw;
+    top: 20vh;
+    left: 50vw;
 }
 
 .small-bottle {
@@ -49,12 +56,14 @@
 .main-page-text {
     z-index: 1;
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-around;
+    height: 80vh;
+    max-height: 80vh;
     left: 10vw;
     top: 20vh;
-}
-
-.main-page-title-subtext {
-    margin-top: 10vh;
 }
 
 .main-page-title-description {
@@ -76,49 +85,28 @@
     background: var(--order-form-gradient);
 }
 
-/* .product-display-container {
-    display: flex;
-    justify-content: center;
-    padding-top: 4vh;
-}
-
-.product-display {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 20vw;
-    width: 60vw;
-    padding: 1rem;
-    background-color: var(--app-panel-back-color);
-}
-
-.product-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-}
-
-.product-box:hover img {
-    box-shadow: 0px 0px 50px 50px rgba(255, 255, 255, 0.751);
-    background-color: rgba(255, 255, 255, 0.751);
-}
-
-.product-image-container {
-    height: 80%;
-}
-
-.product-image {
-    height: 100%;
-    object-fit: cover;
-}
-
-.product-button-container {
-    flex-grow: 2;
-    display: flex;
-    align-items: center;
-} */
-
 .middle-page-container {
     width: 60vw;
+}
+
+@media (max-width: 1200px) {
+    .main-page-title-text {
+        font-size: 3rem;
+    }
+
+    .big-bottle {
+        top: 30vh;
+        max-width: 30vw;
+    }
+}
+
+@media (max-width: 700px) {
+    .main-page-title-text {
+        font-size: 2rem;
+    }
+
+    .big-bottle {
+        top: 35vh;
+        max-width: 40vw;
+    }
 }

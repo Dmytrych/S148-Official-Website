@@ -6,9 +6,9 @@ import './index.css'
 
 function Cart(){
     return (<div className='order-page'>
-        <div className='order-page-caption'>
+        <div className='order-page-caption page-content-wrapper'>
             <div><h2>{locale.order_placement}</h2></div>
-            <div className='order-page-content'>
+            <div className='page-content-block order-page-content'>
                 <div className='order-page-content-block'>
                     <OrderForm />
                 </div>

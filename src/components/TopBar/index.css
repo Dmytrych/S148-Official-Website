@@ -39,10 +39,12 @@
     margin: 1rem;
 }
 
-.nav-button-box {
-
-}
-
 .nav-button-text {
     font-family: "Squares Bold";
+}
+
+@media (max-width: 700px) {
+    .item-menu {
+        display: none;
+    }
 }

@@ -1,0 +1,22 @@
+.lube-display {
+    display: flex;
+    flex-direction: row;
+}
+
+.lube-display-image {
+    width: 100%;
+}
+
+.lube-display-image-container {
+    flex-grow: 2;
+}
+
+.lube-display-description-container {
+    flex-grow: 3;
+}
+
+.lube-display-description {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

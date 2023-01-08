@@ -1,6 +1,4 @@
 .order-page {
-    display: flex;
-    justify-content: center;
     min-height: 90vh;
     background: var(--order-form-gradient);
 }
@@ -8,14 +6,11 @@
 .order-page-content {
     display: flex;
     flex-direction: row;
-    width: 70vw;
 }
 
 @media screen and (max-width: 900px) {
     .order-page-content {
-        display: flex;
         flex-direction: column;
-        width: 70vw;
     }
 }
 

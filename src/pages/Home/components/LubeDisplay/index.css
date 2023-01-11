@@ -1,6 +1,6 @@
 .lube-display {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .lube-display-image {
@@ -16,6 +16,10 @@
 }
 
 .lube-display-description {
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
     display: flex;
     flex-direction: column;
     gap: 20px;

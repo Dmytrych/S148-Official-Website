@@ -38,8 +38,16 @@ export default function Home() {
                 </div>
             </div>
             <div className='page-content-wrapper'>
-                <div className='page-content-block'>
-                    <LubeDisplay />
+                <div className='page-content-block product-display-container'>
+                    <div className='lube-display-container'>
+                        <LubeDisplay />
+                    </div>
+                    <div className='lube-display-container'>
+                        <LubeDisplay />
+                    </div>
+                    <div className='lube-display-container'>
+                        <LubeDisplay />
+                    </div>
                 </div>
             </div>
         </div>

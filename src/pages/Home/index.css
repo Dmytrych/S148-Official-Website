@@ -89,6 +89,19 @@
     width: 60vw;
 }
 
+.product-display-container {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: row;
+    gap: 5vh;
+    margin-bottom: 10vh;
+}
+
+.lube-display-container{
+    border: solid grey 5px;
+    border-bottom: solid grey 5vh;
+}
+
 @media (max-width: 1200px) {
     .main-page-title-text {
         font-size: 3rem;

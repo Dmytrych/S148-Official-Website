@@ -7,10 +7,36 @@ import WarehouseAutocomplete from '../WarehouseAutocomplete';
 import './index.css';
 import ShowHideBox from '../../../../components/ShowHideBox';
 import { useEffect } from 'react';
+import { useFormik } from 'formik';
 
 const novaPoshtaDelivery = "novaPoshta"
 const novaPoshtaCourierDelivery = "novaPoshtaCourier"
 const unselectedDelivery = "unselected"
+
+const validateCustomerInfo = customerData => {
+    const errors = {}
+
+    if(!customerData.name || customerData.name.length > 20){
+        errors.name = locale.field_should_not_be_empty_or_too_big;
+    }
+
+    if(!customerData.middleName || customerData.middleName.length > 20){
+        errors.middleName = locale.field_should_not_be_empty_or_too_big;
+    }
+
+    if(!customerData.surname || customerData.surname.length > 20){
+        errors.surname = locale.field_should_not_be_empty_or_too_big;
+    }
+
+    if(!customerData.email || customerData.email.length > 20){
+        errors.email = locale.field_should_not_be_empty_or_too_big;
+    }
+
+    const phoneRegexp = new RegExp("(\\+380)(\\d{9})$");
+    if(!customerData.phoneNumber || !phoneRegexp.test(customerData.phoneNumber)){
+        errors.phoneNumber = locale.field_should_not_be_empty_or_too_big;
+    }
+}
 
 function OrderForm() {
     const [citySelection, setCitySelection] = useState({
@@ -41,30 +67,49 @@ function OrderForm() {
         )
     } 
 
+    const formikCustomerInfo = useFormik({
+        initialValues: {
+            name: '',
+            middleName: '',
+            surname: '',
+            email: '',
+            phoneNumber: ''
+        },
+        validate: validateCustomerInfo,
+        onSubmit: values=>{
+          alert(JSON.stringify(values));
+        }
+    })
+
     return (
         <>
             <div><FormParagraphSign numberTag={1} text={locale.contact_info} /></div>
             <div className='order-page-content-info-block'>
                 <div className='flex-column'>
                     <div className='credentials-block'>
-                        <FormField label={locale.name} placeholder={locale.name_placeholder} />
-                        <FormField label={locale.middle_name} placeholder={locale.middle_name_placeholder} />
-                        <FormField label={locale.surname} placeholder={locale.surname_placeholder} />
-                        <FormField label={locale.email} placeholder={locale.email_placeholder} />
-                        <FormField label={locale.phone_number} placeholder={locale.phone_number_placeholder} />
+                        <FormField onChange={formikCustomerInfo.handleChange} name="name" label={locale.name} placeholder={locale.name_placeholder} value={formikCustomerInfo.values.name}/>
+                        <FormField onChange={formikCustomerInfo.handleChange} name="middleName" label={locale.middle_name} placeholder={locale.middle_name_placeholder} value={formikCustomerInfo.values.middleName}/>
+                        <FormField onChange={formikCustomerInfo.handleChange} name="surname" label={locale.surname} placeholder={locale.surname_placeholder} value={formikCustomerInfo.values.surname}/>
+                        <FormField onChange={formikCustomerInfo.handleChange} name="email" label={locale.email} placeholder={locale.email_placeholder} value={formikCustomerInfo.values.email}/>
+                        <FormField onChange={formikCustomerInfo.handleChange} name="phoneNumber" label={locale.phone_number} placeholder={locale.phone_number_placeholder} value={formikCustomerInfo.values.phoneNumber}/>
                     </div>
                 </div>
             </div>
-            <div><FormParagraphSign numberTag={2} text={locale.delivery} /></div>
+            <div onClick={formikCustomerInfo.handleSubmit}><FormParagraphSign numberTag={2} text={locale.delivery} /></div>
             <div className='order-page-content-info-block'>
                 <div className='flex-column'>
                     <div className='credentials-block'>
-                        <CityAutocomplete setCitySelection={setCitySelection} />
                         <ShowHideBox title={locale.nova_poshta} showContent={deliveryMethodsSelection[novaPoshtaDelivery]} onClick={() => handleDeliverySelection(novaPoshtaDelivery)}>
-                            <WarehouseAutocomplete cityName={citySelection.name} cityGuidRef={citySelection.cityGuidRef} />
+                            <div className='delivery-info-box'>
+                                <CityAutocomplete setCitySelection={setCitySelection} />
+                                <WarehouseAutocomplete cityName={citySelection.name} cityGuidRef={citySelection.cityGuidRef} />
+                            </div>
                         </ShowHideBox>
                         <ShowHideBox title={locale.nova_poshta_courier_delivery} showContent={deliveryMethodsSelection[novaPoshtaCourierDelivery]} onClick={() => handleDeliverySelection(novaPoshtaCourierDelivery)}>
-                            <WarehouseAutocomplete cityName={citySelection.name} cityGuidRef={citySelection.cityGuidRef} />
+                            <div className='delivery-info-box'>
+                                <CityAutocomplete setCitySelection={setCitySelection} />
+                                <FormField label={locale.phone_number} placeholder={locale.phone_number_placeholder} />
+                            </div>
                         </ShowHideBox>
                     </div>
                 </div>

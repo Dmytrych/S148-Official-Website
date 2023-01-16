@@ -33,5 +33,8 @@ export const locale = {
     nova_poshta_courier_delivery: "Кур'єр Нова Пошта",
 
     loading: "Завантаження...",
-    no_matches_found: "Співпадінь не знайдено."
+    no_matches_found: "Співпадінь не знайдено.",
+
+    address: "Адреса",
+    field_should_not_be_empty_or_too_big: "Поле не має бути порожнім або більшим ніж за 20 символів"
 }

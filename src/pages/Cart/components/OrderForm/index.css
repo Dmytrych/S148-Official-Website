@@ -13,3 +13,9 @@
     flex-direction: column;
     gap: 10px
 }
+
+.delivery-info-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}

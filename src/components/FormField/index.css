@@ -17,6 +17,10 @@
     align-items: center;
 }
 
+.form-field-input-outlined-error {
+    border-color: var(--error-color);
+}
+
 .form-field-input-outlined:focus-within {
     border-color: var(--form-field-selected-outline-color);
     border-width: 1px;

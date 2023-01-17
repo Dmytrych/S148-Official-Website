@@ -10,7 +10,7 @@ export const locale = {
     middle_name: "По-батькові",
     middle_name_placeholder: "Федорович",
     phone_number: "Номер телефону",
-    phone_number_placeholder: "+380731836150",
+    phone_number_placeholder: "+380670000000",
     universal_oil: "Універсальне мастило",
     universal_oil_detailed: "Збройове мастило для очистки й догляду",
     buy: "Купити",
@@ -36,5 +36,7 @@ export const locale = {
     no_matches_found: "Співпадінь не знайдено.",
 
     address: "Адреса",
-    field_should_not_be_empty_or_too_big: "Поле не має бути порожнім або більшим ніж за 20 символів"
+    field_should_not_be_empty_or_too_big: "Поле не має бути порожнім або більшим ніж за 20 символів",
+    field_should_contain_valid_phone_number: "Поле має містити коректний номер телефону",
+    field_should_contain_valid_email: "Поле має містити коректну електронну адресу"
 }

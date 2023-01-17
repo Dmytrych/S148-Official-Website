@@ -28,14 +28,17 @@ const validateCustomerInfo = customerData => {
         errors.surname = locale.field_should_not_be_empty_or_too_big;
     }
 
-    if(!customerData.email || customerData.email.length > 20){
-        errors.email = locale.field_should_not_be_empty_or_too_big;
+    const emailRegexp = new RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
+    if(!customerData.email || !emailRegexp.test(customerData.email)){
+        errors.email = locale.field_should_contain_valid_email;
     }
 
     const phoneRegexp = new RegExp("(\\+380)(\\d{9})$");
     if(!customerData.phoneNumber || !phoneRegexp.test(customerData.phoneNumber)){
-        errors.phoneNumber = locale.field_should_not_be_empty_or_too_big;
+        errors.phoneNumber = locale.field_should_contain_valid_phone_number;
     }
+
+    return errors
 }
 
 function OrderForm() {
@@ -81,17 +84,38 @@ function OrderForm() {
         }
     })
 
+    const novaPoshtaDeliveryInfo = useFormik({
+        initialValues: {
+            cityGuidRef: '',
+            warehouseNumber: ''
+        },
+        validate: validateCustomerInfo,
+        onSubmit: values=>{
+          alert(JSON.stringify(values));
+        }
+    })
+
     return (
         <>
             <div><FormParagraphSign numberTag={1} text={locale.contact_info} /></div>
             <div className='order-page-content-info-block'>
                 <div className='flex-column'>
                     <div className='credentials-block'>
-                        <FormField onChange={formikCustomerInfo.handleChange} name="name" label={locale.name} placeholder={locale.name_placeholder} value={formikCustomerInfo.values.name}/>
-                        <FormField onChange={formikCustomerInfo.handleChange} name="middleName" label={locale.middle_name} placeholder={locale.middle_name_placeholder} value={formikCustomerInfo.values.middleName}/>
-                        <FormField onChange={formikCustomerInfo.handleChange} name="surname" label={locale.surname} placeholder={locale.surname_placeholder} value={formikCustomerInfo.values.surname}/>
-                        <FormField onChange={formikCustomerInfo.handleChange} name="email" label={locale.email} placeholder={locale.email_placeholder} value={formikCustomerInfo.values.email}/>
-                        <FormField onChange={formikCustomerInfo.handleChange} name="phoneNumber" label={locale.phone_number} placeholder={locale.phone_number_placeholder} value={formikCustomerInfo.values.phoneNumber}/>
+                        <FormField onChange={formikCustomerInfo.handleChange} name="name" 
+                            label={locale.name} placeholder={locale.name_placeholder} value={formikCustomerInfo.values.name}
+                            errorText={formikCustomerInfo.errors.name} error={formikCustomerInfo.touched.name && formikCustomerInfo.errors.name}/>
+                        <FormField onChange={formikCustomerInfo.handleChange} name="middleName"
+                            label={locale.middle_name} placeholder={locale.middle_name_placeholder} value={formikCustomerInfo.values.middleName}
+                            errorText={formikCustomerInfo.errors.middleName} error={formikCustomerInfo.touched.middleName && formikCustomerInfo.errors.middleName}/>
+                        <FormField onChange={formikCustomerInfo.handleChange} name="surname"
+                            label={locale.surname} placeholder={locale.surname_placeholder} value={formikCustomerInfo.values.surname}
+                            errorText={formikCustomerInfo.errors.surname} error={formikCustomerInfo.touched.surname && formikCustomerInfo.errors.surname}/>
+                        <FormField onChange={formikCustomerInfo.handleChange} name="email"
+                            label={locale.email} placeholder={locale.email_placeholder} value={formikCustomerInfo.values.email}
+                            errorText={formikCustomerInfo.errors.email} error={formikCustomerInfo.touched.email && formikCustomerInfo.errors.email}/>
+                        <FormField onChange={formikCustomerInfo.handleChange} name="phoneNumber"
+                            label={locale.phone_number} placeholder={locale.phone_number_placeholder} value={formikCustomerInfo.values.phoneNumber}
+                            errorText={formikCustomerInfo.errors.phoneNumber} error={formikCustomerInfo.touched.phoneNumber && formikCustomerInfo.errors.phoneNumber}/>
                     </div>
                 </div>
             </div>

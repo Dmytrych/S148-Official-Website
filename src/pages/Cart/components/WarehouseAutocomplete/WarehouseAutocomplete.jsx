@@ -6,7 +6,7 @@ const minStringLength = 1
 const loadingText = locale.loading
 const no_warehouses_found_text = locale.no_matches_found
 
-function WarehouseAutocomplete({cityName, cityGuidRef}) {
+function WarehouseAutocomplete({cityName, cityGuidRef, error = false}) {
     const getOptionLabel = (warehouse) => warehouse.name;
 
     return (
@@ -22,7 +22,8 @@ function WarehouseAutocomplete({cityName, cityGuidRef}) {
             }}
             noOptionsText={no_warehouses_found_text}
             label={locale.warehouse}
-            getOptionLabel={getOptionLabel} />
+            getOptionLabel={getOptionLabel}
+            error={error} />
     )
 }
 

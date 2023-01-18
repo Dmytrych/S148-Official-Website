@@ -37,6 +37,11 @@ export const locale = {
 
     address: "Адреса",
     field_should_not_be_empty_or_too_big: "Поле не має бути порожнім або більшим ніж за 20 символів",
+    field_should_not_be_empty: "Поле не має бути порожнім",
     field_should_contain_valid_phone_number: "Поле має містити коректний номер телефону",
-    field_should_contain_valid_email: "Поле має містити коректну електронну адресу"
+    field_should_contain_valid_email: "Поле має містити коректну електронну адресу",
+
+    courier_delivery: "Кур'єрська доставка",
+    courier_delivery_info: "Інформація про доставку",
+    courier_delivery_placeholder: "Повна адреса: вулиця, будинок, під'їзд, номер квартири"
 }

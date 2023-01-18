@@ -8,6 +8,7 @@ import './index.css';
 import ShowHideBox from '../../../../components/ShowHideBox';
 import { useEffect } from 'react';
 import { useFormik } from 'formik';
+import { Checkbox, FormControlLabel } from '@mui/material';
 
 const novaPoshtaDelivery = "novaPoshta"
 const novaPoshtaCourierDelivery = "novaPoshtaCourier"
@@ -48,8 +49,12 @@ const validateDeliveryInfo = deliveryInfo => {
         errors.cityGuidRef = locale.field_should_not_be_empty_or_too_big;
     }
 
-    if(!deliveryInfo.warehouseNumber || deliveryInfo.warehouseNumber.length > 20){
+    if(!deliveryInfo.courierDelivery && (!deliveryInfo.warehouseNumber || deliveryInfo.warehouseNumber.length > 20)){
         errors.warehouseNumber = locale.field_should_not_be_empty_or_too_big;
+    }
+
+    if(deliveryInfo.courierDelivery && (!deliveryInfo.address || deliveryInfo.address.length > 100)){
+        errors.address = locale.field_should_not_be_empty;
     }
 
     return errors
@@ -64,6 +69,7 @@ const getDefaultCitySelection = () => {
 
 function OrderForm() {
     const [citySelection, setCitySelection] = useState(getDefaultCitySelection());
+    const [courierDeliverySelection, setCourierDeliverySelection] = useState(false)
     const [deliveryMethodsSelection, setDeliveryMethodsSelection] = useState({
         [novaPoshtaDelivery]: false,
         [novaPoshtaCourierDelivery]: false
@@ -113,13 +119,20 @@ function OrderForm() {
     const novaPoshtaDeliveryInfo = useFormik({
         initialValues: {
             cityGuidRef: '',
-            warehouseNumber: ''
+            warehouseNumber: '',
+            courierDelivery: false,
+            address: ''
         },
         validate: validateDeliveryInfo,
         onSubmit: values=>{
           alert(JSON.stringify(values));
         }
     })
+
+    const handleCourierSelectionChange = (event) => {
+        novaPoshtaDeliveryInfo.handleChange(event);
+        setCourierDeliverySelection(event.target.checked);
+    }
 
     return (
         <>
@@ -152,17 +165,22 @@ function OrderForm() {
                         <ShowHideBox title={locale.nova_poshta} showContent={deliveryMethodsSelection[novaPoshtaDelivery]} onClick={() => handleDeliverySelection(novaPoshtaDelivery)}>
                             <div className='delivery-info-box'>
                                 <CityAutocomplete setCitySelection={handleCitySelection} error={Boolean(novaPoshtaDeliveryInfo.touched.cityGuidRef && novaPoshtaDeliveryInfo.errors.cityGuidRef)}/>
-                                <WarehouseAutocomplete
+                                <FormControlLabel control={<Checkbox onChange={handleCourierSelectionChange} name="courierDelivery"/>} label={locale.courier_delivery} />
+                                { !courierDeliverySelection
+                                ? <WarehouseAutocomplete
                                     cityName={citySelection.name}
                                     cityGuidRef={citySelection.cityGuidRef}
                                     setWarehouseSelection={handleWarehouseSelection}
                                     error={Boolean(novaPoshtaDeliveryInfo.touched.warehouseNumber && novaPoshtaDeliveryInfo.errors.warehouseNumber)} />
+                                : <FormField onChange={novaPoshtaDeliveryInfo.handleChange} name="address"
+                                    label={locale.courier_delivery_info} placeholder={locale.courier_delivery_placeholder} value={novaPoshtaDeliveryInfo.values.address}
+                                    errorText={novaPoshtaDeliveryInfo.errors.address} error={novaPoshtaDeliveryInfo.touched.address && novaPoshtaDeliveryInfo.errors.address}/>}
                             </div>
                         </ShowHideBox>
                         <ShowHideBox title={locale.nova_poshta_courier_delivery} showContent={deliveryMethodsSelection[novaPoshtaCourierDelivery]} onClick={() => handleDeliverySelection(novaPoshtaCourierDelivery)}>
                             <div className='delivery-info-box'>
                                 <CityAutocomplete setCitySelection={handleCitySelection} />
-                                <FormField label={locale.phone_number} placeholder={locale.phone_number_placeholder} />
+                                <FormField label={locale.courier_delivery} placeholder={locale.courier_delivery_placeholder} />
                             </div>
                         </ShowHideBox>
                     </div>

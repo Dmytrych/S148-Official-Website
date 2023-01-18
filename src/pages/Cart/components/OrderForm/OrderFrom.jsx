@@ -41,11 +41,29 @@ const validateCustomerInfo = customerData => {
     return errors
 }
 
-function OrderForm() {
-    const [citySelection, setCitySelection] = useState({
+const validateDeliveryInfo = deliveryInfo => {
+    const errors = {}
+
+    if(!deliveryInfo.cityGuidRef){
+        errors.cityGuidRef = locale.field_should_not_be_empty_or_too_big;
+    }
+
+    if(!deliveryInfo.warehouseNumber || deliveryInfo.warehouseNumber.length > 20){
+        errors.warehouseNumber = locale.field_should_not_be_empty_or_too_big;
+    }
+
+    return errors
+}
+
+const getDefaultCitySelection = () => {
+    return {
         name: "",
         cityGuidRef: ""
-    });
+    }
+}
+
+function OrderForm() {
+    const [citySelection, setCitySelection] = useState(getDefaultCitySelection());
     const [deliveryMethodsSelection, setDeliveryMethodsSelection] = useState({
         [novaPoshtaDelivery]: false,
         [novaPoshtaCourierDelivery]: false
@@ -58,7 +76,6 @@ function OrderForm() {
             Object.keys(deliveryMethodsSelection).forEach(deliveryMethod => deliveryMethodsSelection[deliveryMethod] = false)
             deliveryMethodsSelection[selectedDelivery] = true;
             setDeliveryMethodsSelection({...deliveryMethodsSelection})
-            console.log(deliveryMethodsSelection)
         }
     }, [selectedDelivery])
 
@@ -68,7 +85,16 @@ function OrderForm() {
             ? unselectedDelivery
             : deliveryMethod
         )
-    } 
+    }
+
+    const handleCitySelection = (value) => {
+        setCitySelection(value || getDefaultCitySelection())
+        novaPoshtaDeliveryInfo.setFieldValue("cityGuidRef", value?.cityGuidRef || "")
+    }
+
+    const handleWarehouseSelection = (value) => {
+        novaPoshtaDeliveryInfo.setFieldValue("warehouseNumber", value?.warehouseNumber || "")
+    }
 
     const formikCustomerInfo = useFormik({
         initialValues: {
@@ -89,7 +115,7 @@ function OrderForm() {
             cityGuidRef: '',
             warehouseNumber: ''
         },
-        validate: validateCustomerInfo,
+        validate: validateDeliveryInfo,
         onSubmit: values=>{
           alert(JSON.stringify(values));
         }
@@ -119,19 +145,23 @@ function OrderForm() {
                     </div>
                 </div>
             </div>
-            <div onClick={formikCustomerInfo.handleSubmit}><FormParagraphSign numberTag={2} text={locale.delivery} /></div>
+            <div onClick={() => {  novaPoshtaDeliveryInfo.handleSubmit();}}><FormParagraphSign numberTag={2} text={locale.delivery} /></div>
             <div className='order-page-content-info-block'>
                 <div className='flex-column'>
                     <div className='credentials-block'>
                         <ShowHideBox title={locale.nova_poshta} showContent={deliveryMethodsSelection[novaPoshtaDelivery]} onClick={() => handleDeliverySelection(novaPoshtaDelivery)}>
                             <div className='delivery-info-box'>
-                                <CityAutocomplete setCitySelection={setCitySelection} />
-                                <WarehouseAutocomplete cityName={citySelection.name} cityGuidRef={citySelection.cityGuidRef} />
+                                <CityAutocomplete setCitySelection={handleCitySelection} error={Boolean(novaPoshtaDeliveryInfo.touched.cityGuidRef && novaPoshtaDeliveryInfo.errors.cityGuidRef)}/>
+                                <WarehouseAutocomplete
+                                    cityName={citySelection.name}
+                                    cityGuidRef={citySelection.cityGuidRef}
+                                    setWarehouseSelection={handleWarehouseSelection}
+                                    error={Boolean(novaPoshtaDeliveryInfo.touched.warehouseNumber && novaPoshtaDeliveryInfo.errors.warehouseNumber)} />
                             </div>
                         </ShowHideBox>
                         <ShowHideBox title={locale.nova_poshta_courier_delivery} showContent={deliveryMethodsSelection[novaPoshtaCourierDelivery]} onClick={() => handleDeliverySelection(novaPoshtaCourierDelivery)}>
                             <div className='delivery-info-box'>
-                                <CityAutocomplete setCitySelection={setCitySelection} />
+                                <CityAutocomplete setCitySelection={handleCitySelection} />
                                 <FormField label={locale.phone_number} placeholder={locale.phone_number_placeholder} />
                             </div>
                         </ShowHideBox>

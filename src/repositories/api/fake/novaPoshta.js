@@ -15,7 +15,8 @@ export async function getWarehouseByNumber(cityName, cityRef, warehouseNumber) {
 
     return Promise.resolve({
         name: warehouse.name,
-        warehouseGuidRef: warehouse.warehouseGuidRef
+        warehouseGuidRef: warehouse.warehouseGuidRef,
+        warehouseNumber: warehouse.warehouseNumber
     })
 }
 

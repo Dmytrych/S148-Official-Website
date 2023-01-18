@@ -16,7 +16,7 @@ function CityAutocomplete({ setCitySelection, error = false }) {
             label={locale.city}
             getOptionLabel={getOptionLabel}
             onChange={(event, value) => setCitySelection(value)}
-            error={error} />
+            error={!!error} />
     )
 }
 

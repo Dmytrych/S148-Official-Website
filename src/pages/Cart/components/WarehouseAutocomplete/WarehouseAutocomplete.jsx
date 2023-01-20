@@ -6,14 +6,15 @@ const minStringLength = 1
 const loadingText = locale.loading
 const no_warehouses_found_text = locale.no_matches_found
 
-function WarehouseAutocomplete({cityName, cityGuidRef, setWarehouseSelection, error = false}) {
-    const getOptionLabel = (warehouse) => warehouse.name;
+function WarehouseAutocomplete({cityName, cityGuidRef, setWarehouseSelection, value="", error = false}) {
+    const getOptionLabel = (warehouse) => warehouse ? warehouse.name.toString() : "";
 
     return (
         <CustomAutocomplete
             minStringLength={minStringLength}
             loadingText={loadingText}
             getOptions={async (warehouseNumber) => {
+                console.log(warehouseNumber)
                 if(isNaN(warehouseNumber)){
                     return Promise.resolve([])
                 }
@@ -24,7 +25,8 @@ function WarehouseAutocomplete({cityName, cityGuidRef, setWarehouseSelection, er
             label={locale.warehouse}
             getOptionLabel={getOptionLabel}
             onChange={(event, value) => setWarehouseSelection(value)}
-            error={error} />
+            error={error} 
+            value={value}/>
     )
 }
 

@@ -1,43 +1,43 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import CartContext from '../../../../contexts/CartContext';
 import { locale } from '../../../../locale/ua';
 import './index.css'
 
-function CartSummary(){
+function CartSummary() {
     const [products, setProducts] = useState([])
     const cartContext = useContext(CartContext)
-    
+
     useEffect(() => {
         const cartEntries = Object.entries(cartContext.cart);
-        if(cartEntries && cartEntries.length > 0){
+        if (cartEntries && cartEntries.length > 0) {
             setProducts(cartEntries.map(getProductValue))
         }
-      }, [cartContext.cart]);
+    }, [cartContext]);
 
     return (
-    <div className='order-summary'>
-        <h2>{locale.total}</h2>
-        <div>
-            {products.map(product => {
-                return <div key={product.id} className='order-product-summary-line'>
-                    <div>
-                        {product.quantity}x {product.name}
+        <div className='order-summary'>
+            <h2>{locale.total}</h2>
+            <div>
+                {products.map(product => {
+                    return <div key={product.id} className='order-product-summary-line'>
+                        <div>
+                            {product.quantity}x {product.name}
+                        </div>
+                        <div>
+                            {product.quantity * product.unitPrice}₴
+                        </div>
                     </div>
-                    <div>
-                        {product.quantity * product.unitPrice}₴
-                    </div>
+                })}
+            </div>
+            <div className='order-total-cost-line'>
+                <div>
+                    {locale.to_be_paid}
                 </div>
-            })}
-        </div>
-        <div className='order-total-cost-line'>
-            <div>
-                {locale.to_be_paid}
+                <div>
+                    {products.reduce((acc, product) => acc + (product.unitPrice * product.quantity), 0)}₴
+                </div>
             </div>
-            <div>
-                {products.reduce((acc, product) => acc + (product.unitPrice * product.quantity), 0)}₴
-            </div>
-        </div>
-    </div>)
+        </div>)
 }
 
 const getProductValue = (productKeyValue) => {

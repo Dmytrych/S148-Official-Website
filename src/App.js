@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -13,6 +13,7 @@ import "./App.css"
 import "./styles/shared.css"
 
 function App() {
+  const [appDidMount] = useState(false)
   const [cart, setCart] = useState({});
 
   const saveCart = (newCart) => {
@@ -21,25 +22,27 @@ function App() {
   }
 
   useEffect(() => {
-    const currentCart = getLocalCart()
-    if(currentCart){
-      setCart(currentCart)
+    if(appDidMount){
+      const currentCart = getLocalCart()
+      if (currentCart) {
+        setCart(currentCart)
+      }
     }
-  }, [])
+  }, [appDidMount])
 
   return (
     <>
       <ThemeProvider>
-        <CartContext.Provider value={{cart, saveCart}}>
+        <CartContext.Provider value={{ cart, saveCart }}>
           <WrapperPage>
             <div className="app-top-bar">
-              <TopBar/>
+              <TopBar />
             </div>
             <Routes>
-              <Route path="/" element={<Home/>} />
-              <Route path="/order" element={<Order/>} />
-              <Route path="/products" element={<Products/>} />
-              <Route path="/cart" element={<Cart/>} />
+              <Route path="/" element={<Home />} />
+              <Route path="/order" element={<Order />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/cart" element={<Cart />} />
             </Routes>
           </WrapperPage>
         </CartContext.Provider>

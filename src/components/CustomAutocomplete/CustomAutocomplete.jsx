@@ -45,6 +45,7 @@ function CustomAutocomplete(
     return (
         <Autocomplete
             {...props}
+            freeSolo={true}
             onChange={onChange}
             disablePortal
             options={options}

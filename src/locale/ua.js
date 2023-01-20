@@ -28,9 +28,8 @@ export const locale = {
     contact_info: "Контактні дані",
     delivery: "Доставка",
     city: "Місто",
-    warehouse: "Відділення",
+    warehouse: "Номер відділення",
     nova_poshta: "Нова Пошта",
-    nova_poshta_courier_delivery: "Кур'єр Нова Пошта",
 
     loading: "Завантаження...",
     no_matches_found: "Співпадінь не знайдено.",

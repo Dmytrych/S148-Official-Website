@@ -14,7 +14,6 @@ function WarehouseAutocomplete({cityName, cityGuidRef, setWarehouseSelection, va
             minStringLength={minStringLength}
             loadingText={loadingText}
             getOptions={async (warehouseNumber) => {
-                console.log(warehouseNumber)
                 if(isNaN(warehouseNumber)){
                     return Promise.resolve([])
                 }

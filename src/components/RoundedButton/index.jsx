@@ -1,24 +1,35 @@
+import { NoSsr } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { noop } from '../../utils';
 import './index.css';
 
-function RoundedButton({ text, size = 'big', type = 'normal', onClick = noop }) {
-      const sizeCss = size == 'big' ? 'rounded-button-big' : 'rounded-button-small'
-      let typeCss;
-      switch (type) {
-        case 'success':
-          typeCss = 'rounded-button-success'
-          break;
-        case 'error':
-          typeCss = 'rounded-button-error';
-          break;
-      }
+const sizeToCssMapping = {
+  big: 'rounded-button-big',
+  medium: 'rounded-button-medium',
+  small: 'rounded-button-small'
+}
 
-      return (
-        <div className={`rounded-button ${sizeCss} ${typeCss}`} onClick={onClick}>
-            {text}
-        </div>
-      );
+const typeToCssMapping = {
+  normal: '',
+  success: 'rounded-button-success',
+  error: 'rounded-button-error'
+}
+
+function RoundedButton({ text, size = 'big', type = 'normal', disabled = false, onClick = noop }) {
+  const sizeCss = sizeToCssMapping[size] ?? sizeToCssMapping['medium']
+  const typeCss = typeToCssMapping[type] ?? typeToCssMapping['normal']
+
+  const handleClick = (event) => {
+    if(!disabled){
+      onClick(event)
+    }
+  }
+
+  return (
+    <div className={`rounded-button ${sizeCss} ${typeCss} ${disabled && 'rounded-button-disabled'}`} onClick={handleClick}>
+      {text}
+    </div>
+  );
 }
 
 export default RoundedButton;

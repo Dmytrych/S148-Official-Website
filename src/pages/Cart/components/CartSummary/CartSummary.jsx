@@ -1,18 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import RoundedButton from '../../../../components/RoundedButton';
 import CartContext from '../../../../contexts/CartContext';
 import { locale } from '../../../../locale/ua';
 import './index.css'
 
-function CartSummary() {
-    const [products, setProducts] = useState([])
-    const cartContext = useContext(CartContext)
-
-    useEffect(() => {
-        const cartEntries = Object.entries(cartContext.cart);
-        if (cartEntries && cartEntries.length > 0) {
-            setProducts(cartEntries.map(getProductValue))
-        }
-    }, [cartContext]);
+function CartSummary({ handleSubmit, disableSubmit, products }) {
 
     return (
         <div className='order-summary'>
@@ -37,15 +29,10 @@ function CartSummary() {
                     {products.reduce((acc, product) => acc + (product.unitPrice * product.quantity), 0)}₴
                 </div>
             </div>
+            <div className='order-confirm-button'>
+                <RoundedButton text={locale.confirm_order} size='medium' disabled={disableSubmit} onClick={handleSubmit} />
+            </div>
         </div>)
-}
-
-const getProductValue = (productKeyValue) => {
-    return productKeyValue[1]
-}
-
-const getProductId = (productKeyValue) => {
-    return productKeyValue[0]
 }
 
 export default CartSummary;

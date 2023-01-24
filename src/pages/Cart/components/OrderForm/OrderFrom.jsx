@@ -6,58 +6,12 @@ import CityAutocomplete from '../CityAutocomplete';
 import WarehouseAutocomplete from '../WarehouseAutocomplete';
 import './index.css';
 import ShowHideBox from '../../../../components/ShowHideBox';
-import { Checkbox, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControlLabel, TextField } from '@mui/material';
 import { Form } from 'formik';
 
 const novaPoshtaDelivery = "novaPoshta"
 const novaPoshtaCourierDelivery = "novaPoshtaCourier"
 const unselectedDelivery = "unselected"
-
-const validateCustomerInfo = customerData => {
-    const errors = {}
-
-    if (!customerData.name || customerData.name.length > 20) {
-        errors.name = locale.field_should_not_be_empty_or_too_big;
-    }
-
-    if (!customerData.middleName || customerData.middleName.length > 20) {
-        errors.middleName = locale.field_should_not_be_empty_or_too_big;
-    }
-
-    if (!customerData.surname || customerData.surname.length > 20) {
-        errors.surname = locale.field_should_not_be_empty_or_too_big;
-    }
-
-    const emailRegexp = new RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
-    if (!customerData.email || !emailRegexp.test(customerData.email)) {
-        errors.email = locale.field_should_contain_valid_email;
-    }
-
-    const phoneRegexp = new RegExp("(\\+380)(\\d{9})$");
-    if (!customerData.phoneNumber || !phoneRegexp.test(customerData.phoneNumber)) {
-        errors.phoneNumber = locale.field_should_contain_valid_phone_number;
-    }
-
-    return errors
-}
-
-const validateDeliveryInfo = deliveryInfo => {
-    const errors = {}
-
-    if (!deliveryInfo.cityGuidRef) {
-        errors.cityGuidRef = locale.field_should_not_be_empty_or_too_big;
-    }
-
-    if (!deliveryInfo.courierDelivery && (!deliveryInfo.warehouseNumber || deliveryInfo.warehouseNumber.length > 20)) {
-        errors.warehouseNumber = locale.field_should_not_be_empty_or_too_big;
-    }
-
-    if (deliveryInfo.courierDelivery && (!deliveryInfo.address || deliveryInfo.address.length > 100)) {
-        errors.address = locale.field_should_not_be_empty;
-    }
-
-    return errors
-}
 
 const getDefaultCitySelection = () => {
     return {
@@ -118,7 +72,6 @@ function OrderForm({ errors, touched, handleChange, setFieldValue, values, handl
             <div className='order-page-content-info-block'>
                 <div className='flex-column'>
                     <div className='credentials-block'>
-                        <Form>
                             <FormField onChange={handleChange} name="name"
                                 label={locale.name} placeholder={locale.name_placeholder} value={values.name}
                                 errorText={errors.name} error={touched.name && errors.name} />
@@ -134,7 +87,6 @@ function OrderForm({ errors, touched, handleChange, setFieldValue, values, handl
                             <FormField onChange={handleChange} name="phoneNumber"
                                 label={locale.phone_number} placeholder={locale.phone_number_placeholder} value={values.phoneNumber}
                                 errorText={errors.phoneNumber} error={touched.phoneNumber && errors.phoneNumber} />
-                        </Form>
                     </div>
                 </div>
             </div>
@@ -144,17 +96,17 @@ function OrderForm({ errors, touched, handleChange, setFieldValue, values, handl
                     <div className='credentials-block'>
                         <ShowHideBox title={locale.nova_poshta} showContent={deliveryMethodsSelection[novaPoshtaDelivery]} onClick={() => handleDeliverySelection(novaPoshtaDelivery)}>
                             <div className='delivery-info-box'>
-                                <CityAutocomplete setCitySelection={handleCitySelection} error={Boolean(touched.deliveryInfo?.data.cityGuidRef && errors.deliveryInfo?.data.cityGuidRef)} />
+                                <CityAutocomplete setCitySelection={handleCitySelection} error={Boolean(touched.deliveryInfo?.data.cityGuidRef && errors.cityGuidRef)} />
                                 <FormControlLabel control={<Checkbox onChange={handleCourierSelectionChange} name="deliveryInfo.data.courierDelivery" />} label={locale.courier_delivery} />
                                 {!courierDeliverySelection
                                     ? <WarehouseAutocomplete
                                         cityName={citySelection.name}
                                         cityGuidRef={citySelection.cityGuidRef}
                                         setWarehouseSelection={handleWarehouseSelection}
-                                        error={Boolean(touched.deliveryInfo?.data.warehouseNumber && errors.deliveryInfo?.data.warehouseNumber)}/>
+                                        error={Boolean(touched.deliveryInfo?.data.warehouseNumber && errors.warehouseNumber)}/>
                                     : <FormField onChange={handleChange} name="deliveryInfo.data.address"
                                         label={locale.courier_delivery_info} placeholder={locale.courier_delivery_placeholder} value={values.deliveryInfo?.data.address}
-                                        errorText={errors.deliveryInfo?.data.address} error={touched.deliveryInfo?.data.address && errors.deliveryInfo?.data.address} />}
+                                        errorText={errors.address} error={touched.deliveryInfo?.data.address && errors.deliveryInfo?.data.address} />}
                             </div>
                         </ShowHideBox>
                     </div>

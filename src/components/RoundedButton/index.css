@@ -14,11 +14,23 @@
     color: var(--success-color);
 }
 
+.rounded-button-disabled {
+    color: var(--global-color-inactive);
+}
+
 .rounded-button-big {
     padding-left: 2rem;
     padding-right: 2rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+.rounded-button-medium {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 0.9rem;
 }
 
 .rounded-button-small {

@@ -15,13 +15,10 @@ function TallProductCard({className, product}) {
 
     const updateCart = () => {
         if(cartContext.cart[product.id]){
-            cartContext.cart[product.id].quantity += 1
+            cartContext.cart[product.id] += 1
         }
         else {
-            cartContext.cart[product.id] = {
-                ...product,
-                quantity: defaultProductQuantity
-            }
+            cartContext.cart[product.id] = defaultProductQuantity
         }
         cartContext.saveCart({...cartContext.cart})
     }
@@ -31,10 +28,6 @@ function TallProductCard({className, product}) {
             <img src={bottleImage}/>
         </div>
         <span className='product-name-text'>{product.name}</span>
-        {/* <div>
-            <span>{locale.in_your_cart}:{cartContext.cart[product.id].quantity ?? 0}</span>
-            <PlusMinusControl value={quantity} decreaseButtonClick={decreaseButtonClick} increaseButtonClick={increaseButtonClick}/>
-        </div> */}
         <div className='product-price-box'>
             <span className='product-price-tag'>{product.unitPrice}₴</span>
             <RoundedButton text={locale.buy} onClick={updateCart}/>

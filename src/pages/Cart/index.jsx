@@ -1,6 +1,8 @@
 import { Formik, useFormik } from 'formik';
 import React, { useContext, useState } from 'react'
+import { useRef } from 'react';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CartContext from '../../contexts/CartContext';
 import { locale } from '../../locale/ua';
 import { getAllProductsFiltered } from '../../repositories/api';
@@ -77,33 +79,33 @@ const initialValues = {
     }
 }
 
-const getProductValue = (productKeyValue) => {
-    return productKeyValue[1]
-}
-
-const getProductId = (productKeyValue) => {
-    return productKeyValue[0]
-}
-
-const retrieveProductData = async (productToQuantityMapping) => {
-    var productIds = productToQuantityMapping.reduce((accumulator, pair) => [...accumulator, getProductId(pair)], [])
-    return await getAllProductsFiltered(productIds)
-}
-
 function Cart() {
+    let navigate = useNavigate();
+    const dataLoaded = useRef(false)
     const [products, setProducts] = useState([])
     const cartContext = useContext(CartContext)
 
+    const handleRemoveCartItem = (productId) => {
+        delete cartContext.cart[productId]
+        setProducts(products.filter(product => product.id != productId))
+        cartContext.saveCart({...cartContext.cart})
+    }
+
     useEffect(() => {
-        async function fetchData(cartEntries) {
-            console.log(cartEntries)
-            const fetchedProducts = await retrieveProductData(cartEntries)
-            console.log(fetchedProducts)
-            setProducts(fetchedProducts)
+        if(!dataLoaded.current){
+            async function fetchData() {
+                const productIds = Object.keys(cartContext.cart)
+                const retrievedProducts = await getAllProductsFiltered(productIds)
+                retrievedProducts.map(product => product.quantity = cartContext.cart[product.id])
+                setProducts(retrievedProducts)
+            }
+
+            fetchData();
+
+            return () => {dataLoaded.current = true}
         }
-        const cartEntries = Object.entries(cartContext.cart);
-        if (cartEntries && cartEntries.length > 0) {
-            fetchData(cartEntries);
+        if(Object.keys(cartContext.cart).length <= 0){
+            navigate('/')
         }
     }, [cartContext]);
 
@@ -120,7 +122,11 @@ function Cart() {
                             <OrderForm {...props} />
                         </div>
                         <div className='order-summary-block'>
-                            <CartSummary handleSubmit={props.handleSubmit} disableSubmit={!props.touched || !props.isValid} products={products} />
+                            <CartSummary
+                                handleSubmit={props.handleSubmit}
+                                disableSubmit={!props.touched || !props.isValid}
+                                products={products}
+                                removeCartItem={handleRemoveCartItem} />
                         </div>
                     </div>
                 )} />

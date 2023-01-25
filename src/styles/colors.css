@@ -2,8 +2,10 @@
     font-size: var(--global-text-size);
     font-family: var(--global-font-family);
 
+    --global-text-color: #000000;
+    --global-color-inactive: #9c9c9c7a;
+
     --global-font-family: 'IBMPlexSans Regular';
-    --global-text-color: #e795da;
     --global-primary-title-size: 2rem;
     --global-text-size: 14px;
     --global-color-primary: #70c963;
@@ -12,8 +14,6 @@
     --global-color-warning: #e28413;
     --global-color-danger: #ff6542;
     --global-background-color: #339557;
-
-    --global-color-inactive: #9c9c9c7a;
 
     --form-field-outline-color: #779fa1;
     --form-field-selected-outline-color: #1976d2;
@@ -30,10 +30,6 @@
         240.51deg,
         #22ff004f 4.27%,
         #07202CD9 114.23%);
-    --main-page-secondary-gradient: linear-gradient(
-        100.51deg,
-        #22ff004f 4.27%,
-        #b9b9b9d9 114.23%);
 
     --order-form-gradient: radial-gradient(
         59.59% 160.1% at 42.67% 40.41%,

@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import React from 'react'
 import RoundedButton from '../../../../components/RoundedButton';
-import CartContext from '../../../../contexts/CartContext';
 import { locale } from '../../../../locale/ua';
+import { noop } from '../../../../utils';
 import './index.css'
 
-function CartSummary({ handleSubmit, disableSubmit, products }) {
+function CartSummary({ handleSubmit, disableSubmit, products, removeCartItem = (productId) => noop() }) {
 
     return (
         <div className='order-summary'>
@@ -12,6 +13,9 @@ function CartSummary({ handleSubmit, disableSubmit, products }) {
             <div>
                 {products.map(product => {
                     return <div key={product.id} className='order-product-summary-line'>
+                        <div>
+                            <DeleteOutlineOutlinedIcon color='error' onClick={() => removeCartItem(product.id)}/>
+                        </div>
                         <div>
                             {product.quantity}x {product.name}
                         </div>

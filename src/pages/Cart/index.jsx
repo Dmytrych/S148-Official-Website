@@ -1,4 +1,4 @@
-import { Formik, useFormik } from 'formik';
+import { Formik } from 'formik';
 import React, { useContext, useState } from 'react'
 import { useRef } from 'react';
 import { useEffect } from 'react';
@@ -42,26 +42,6 @@ const validateForm = values => {
     return errors
 }
 
-const handleSubmit = (values) => {
-    const dataModel = {
-        warehouseNumber: 0,
-        cityGuidRef: "",
-        customerModel: {
-            name: "",
-            surname: "",
-            middleName: "",
-            phoneNumber: "",
-            email: ""
-        },
-        products: [
-            {
-                ProductId: 0,
-                quantity: 0
-            }
-        ]
-    }
-}
-
 const initialValues = {
     name: '',
     middleName: '',
@@ -84,6 +64,24 @@ function Cart() {
     const dataLoaded = useRef(false)
     const [products, setProducts] = useState([])
     const cartContext = useContext(CartContext)
+
+    const handleSubmit = (values) => {
+        const dataModel = {
+            warehouseNumber: values.deliveryInfo.data.warehouseNumber,
+            cityGuidRef: values.deliveryInfo.data.cityGuidRef,
+            customerModel: {
+                name: values.name,
+                surname: values.surname,
+                middleName: values.middleName,
+                phoneNumber: values.phoneNumber,
+                email: values.email
+            },
+            products: products.map(product => ({
+                productId: product.id,
+                quantity: product.quantity
+            }))
+        }
+    }
 
     const handleRemoveCartItem = (productId) => {
         delete cartContext.cart[productId]
@@ -113,6 +111,7 @@ function Cart() {
         <div className='order-page-caption page-content-wrapper'>
             <div><h2>{locale.order_placement}</h2></div>
             <Formik
+                validateOnMount
                 initialValues={initialValues}
                 validate={validateForm}
                 onSubmit={(values) => alert(JSON.stringify(values))}
@@ -124,7 +123,7 @@ function Cart() {
                         <div className='order-summary-block'>
                             <CartSummary
                                 handleSubmit={props.handleSubmit}
-                                disableSubmit={!props.touched || !props.isValid}
+                                disableSubmit={!props.isValid}
                                 products={products}
                                 removeCartItem={handleRemoveCartItem} />
                         </div>

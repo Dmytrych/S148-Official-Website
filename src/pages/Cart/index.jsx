@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CartContext from '../../contexts/CartContext';
 import { locale } from '../../locale/ua';
-import { getAllProductsFiltered } from '../../repositories/api';
+import { create, getAllProductsFiltered } from '../../repositories/api';
 import CartSummary from './components/CartSummary';
 import OrderForm from './components/OrderForm/OrderFrom';
 import './index.css'
@@ -14,13 +14,13 @@ import './index.css'
 const validateForm = values => {
     const errors = {}
     if (!values.name || values.name.length > 20) {
-        errors.name = locale.field_should_not_be_empty_or_too_big;
+        errors.name = locale.field_should_not_be_empty_or_bigger_than_20;
     }
     if (!values.middleName || values.middleName.length > 20) {
-        errors.middleName = locale.field_should_not_be_empty_or_too_big;
+        errors.middleName = locale.field_should_not_be_empty_or_bigger_than_20;
     }
     if (!values.surname || values.surname.length > 20) {
-        errors.surname = locale.field_should_not_be_empty_or_too_big;
+        errors.surname = locale.field_should_not_be_empty_or_bigger_than_20;
     }
     const emailRegexp = new RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     if (!values.email || !emailRegexp.test(values.email)) {
@@ -30,14 +30,8 @@ const validateForm = values => {
     if (!values.phoneNumber || !phoneRegexp.test(values.phoneNumber)) {
         errors.phoneNumber = locale.field_should_contain_valid_phone_number;
     }
-    if (!values.deliveryInfo.data.cityGuidRef) {
-        errors.cityGuidRef = locale.field_should_not_be_empty_or_too_big;
-    }
-    if (!values.deliveryInfo.data.courierDelivery && (!values.deliveryInfo.data.warehouseNumber || isNaN(values.deliveryInfo.data.warehouseNumber))) {
-        errors.warehouseNumber = locale.field_should_not_be_empty_or_too_big;
-    }
-    if (values.deliveryInfo.data.courierDelivery && (!values.deliveryInfo.data.address || values.deliveryInfo.data.address.length > 100)) {
-        errors.address = locale.field_should_not_be_empty;
+    if (!values.description || values.description.length > 100) {
+        errors.description = locale.field_should_not_be_empty_or_bigger_than_100;
     }
     return errors
 }
@@ -48,15 +42,7 @@ const initialValues = {
     surname: '',
     email: '',
     phoneNumber: '',
-    deliveryInfo: {
-        type: '',
-        data: {
-            cityGuidRef: '',
-            warehouseNumber: '',
-            courierDelivery: false,
-            address: ''
-        }
-    }
+    description: ''
 }
 
 function Cart() {
@@ -65,10 +51,9 @@ function Cart() {
     const [products, setProducts] = useState([])
     const cartContext = useContext(CartContext)
 
-    const handleSubmit = (values) => {
+    const handleSubmit = async (values) => {
         const dataModel = {
-            warehouseNumber: values.deliveryInfo.data.warehouseNumber,
-            cityGuidRef: values.deliveryInfo.data.cityGuidRef,
+            description: values.description,
             customerModel: {
                 name: values.name,
                 surname: values.surname,
@@ -81,6 +66,8 @@ function Cart() {
                 quantity: product.quantity
             }))
         }
+
+        await create('novaPoshta', dataModel)
     }
 
     const handleRemoveCartItem = (productId) => {
@@ -114,7 +101,7 @@ function Cart() {
                 validateOnMount
                 initialValues={initialValues}
                 validate={validateForm}
-                onSubmit={(values) => alert(JSON.stringify(values))}
+                onSubmit={handleSubmit}
                 children={props => (
                     <div className='page-content-block order-page-content'>
                         <div className='order-page-content-block'>

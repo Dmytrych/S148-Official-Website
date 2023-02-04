@@ -21,7 +21,7 @@ function WarehouseAutocomplete({cityName, cityGuidRef, setWarehouseSelection, va
                 return warehouse ? [warehouse] : Promise.resolve([])
             }}
             noOptionsText={no_warehouses_found_text}
-            label={locale.warehouse}
+            label={locale.warehouse_info}
             getOptionLabel={getOptionLabel}
             onChange={(event, value) => setWarehouseSelection(value)}
             error={error} 

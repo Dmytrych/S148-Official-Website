@@ -28,21 +28,21 @@ export const locale = {
     contact_info: "Контактні дані",
     delivery: "Доставка",
     city: "Місто",
-    warehouse: "Номер відділення",
     nova_poshta: "Нова Пошта",
     address: "Адреса",
 
     loading: "Завантаження...",
     no_matches_found: "Співпадінь не знайдено.",
 
-    field_should_not_be_empty_or_too_big: "Поле не має бути порожнім або більшим ніж за 20 символів",
+    field_should_not_be_empty_or_bigger_than_20: "Поле не має бути порожнім або більшим ніж за 20 символів",
+    field_should_not_be_empty_or_bigger_than_100: "Поле не має бути порожнім або більшим ніж за 100 символів",
     field_should_not_be_empty: "Поле не має бути порожнім",
     field_should_contain_valid_phone_number: "Поле має містити номер телефону у форматі +380*********",
     field_should_contain_valid_email: "Поле має містити коректну електронну адресу",
 
     courier_delivery: "Кур'єрська доставка",
-    courier_delivery_info: "Інформація про доставку",
-    courier_delivery_placeholder: "Повна адреса: вулиця, будинок, під'їзд, номер квартири",
+    delivery_info: "Інформація про доставку",
+    delivery_info_placeholder: "Номер відділення або адреса кур'єрської доставки",
 
     confirm_order: "Підтвердити замовлення"
 }

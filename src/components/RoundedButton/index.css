@@ -6,8 +6,16 @@
     user-select: none;
 }
 
+.rounded-button:hover {
+    background-color: rgb(249, 255, 243);
+}
+
 .rounded-button-error {
     color: var(--error-color);
+}
+
+.rounded-button:active {
+    background-color: rgb(206, 255, 147);
 }
 
 .rounded-button-success {
@@ -16,6 +24,11 @@
 
 .rounded-button-disabled {
     color: var(--global-color-inactive);
+    background-color: white;
+    width: fit-content;
+    border-radius: 2rem;
+    cursor: pointer;
+    user-select: none;
 }
 
 .rounded-button-big {

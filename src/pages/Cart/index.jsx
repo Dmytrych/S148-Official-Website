@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CartContext from '../../contexts/CartContext';
+import { useCart } from '../../hooks/useCart';
 import { locale } from '../../locale/ua';
 import { create, getAllProductsFiltered } from '../../repositories/api';
 import CartSummary from './components/CartSummary';
@@ -49,7 +49,7 @@ function Cart() {
     let navigate = useNavigate();
     const dataLoaded = useRef(false)
     const [products, setProducts] = useState([])
-    const cartContext = useContext(CartContext)
+    const cartContext = useCart()
 
     const handleSubmit = async (values) => {
         const dataModel = {
@@ -68,6 +68,9 @@ function Cart() {
         }
 
         await create('novaPoshta', dataModel)
+
+        cartContext.saveCart([])
+        navigate('/')
     }
 
     const handleRemoveCartItem = (productId) => {

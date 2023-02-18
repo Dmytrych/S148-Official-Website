@@ -26,7 +26,7 @@ function RoundedButton({ text, size = 'big', type = 'normal', disabled = false, 
   }
 
   return (
-    <div className={`rounded-button ${sizeCss} ${typeCss} ${disabled && 'rounded-button-disabled'}`} onClick={handleClick}>
+    <div className={`${disabled ? 'rounded-button-disabled' : 'rounded-button'} ${sizeCss} ${typeCss}`} onClick={handleClick}>
       {text}
     </div>
   );

@@ -1,12 +1,6 @@
-.main-frame {
-    font-family: var(--main-page-font-family);
-    min-height: 90vh;
-    width: 100%;
-}
-
 .title-page {
     z-index: 0;
-    height: 90vh;
+    height: 92vh;
     background: var(--main-page-gradient);   
 }
 
@@ -18,12 +12,6 @@
 }
 
 .scratch-mark {
-    /* z-index: 1;
-    position: relative;
-    transform: rotate(-4deg);
-    height: 100vh;
-    z-index: 1;
-    left: 15vw; */
     display: block;
     width: 100%;
     height: 100%;
@@ -87,14 +75,6 @@
 
 .middle-page-container {
     width: 60vw;
-}
-
-.product-display-container {
-    margin-top: 5vh;
-    display: flex;
-    flex-direction: row;
-    gap: 5vh;
-    margin-bottom: 10vh;
 }
 
 .lube-display-container{

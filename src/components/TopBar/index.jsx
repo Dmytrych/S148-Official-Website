@@ -1,18 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import logo from '../../imgShared/S148.png'
 import { locale } from '../../locale/ua';
 import './index.css';
 import { NavLink } from 'react-router-dom';
-import CartContext from '../../contexts/CartContext';
 import { useEffect } from 'react';
+import { useCart } from '../../hooks/useCart';
 
 function TopBar() {
-    const [cartLinkDisabled, setcartLinkDisabled] = useState(true)
-    const cartContext = useContext(CartContext)
+    const [cartLinkDisabled, setCartLinkDisabled] = useState(true);
+    const [ cart ] = useCart();
 
     useEffect(() => {
-        setcartLinkDisabled(Object.keys(cartContext.cart).length <= 0)
-    }, [cartContext])
+        setCartLinkDisabled(Object.keys(cart).length <= 0)
+    }, [cart])
 
     return (
         <div className='top-bar'>

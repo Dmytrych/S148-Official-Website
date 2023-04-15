@@ -49,7 +49,7 @@ function Cart() {
     let navigate = useNavigate();
     const dataLoaded = useRef(false)
     const [products, setProducts] = useState([])
-    const cartContext = useCart()
+    const [ cart, saveCart ] = useCart()
 
     const handleSubmit = async (values) => {
         const dataModel = {
@@ -69,22 +69,22 @@ function Cart() {
 
         await create('novaPoshta', dataModel)
 
-        cartContext.saveCart([])
+        saveCart([])
         navigate('/')
     }
 
     const handleRemoveCartItem = (productId) => {
-        delete cartContext.cart[productId]
+        delete cart[productId]
         setProducts(products.filter(product => product.id != productId))
-        cartContext.saveCart({...cartContext.cart})
+        saveCart({...cart})
     }
 
     useEffect(() => {
         if(!dataLoaded.current){
             async function fetchData() {
-                const productIds = Object.keys(cartContext.cart)
+                const productIds = Object.keys(cart)
                 const retrievedProducts = await getAllProductsFiltered(productIds)
-                retrievedProducts.map(product => product.quantity = cartContext.cart[product.id])
+                retrievedProducts.map(product => product.quantity = cart[product.id])
                 setProducts(retrievedProducts)
             }
 
@@ -92,10 +92,10 @@ function Cart() {
 
             return () => {dataLoaded.current = true}
         }
-        if(Object.keys(cartContext.cart).length <= 0){
+        if(Object.keys(cart).length <= 0){
             navigate('/')
         }
-    }, [cartContext]);
+    }, [cart]);
 
     return (<div className='order-page'>
         <div className='order-page-caption page-content-wrapper'>

@@ -16,7 +16,7 @@
 }
 
 .show-hide-box-selected {
-    border: 2px solid var(--global-color-primary);
+    border: var(--global-selected-border-thin);
     border-radius: 5px;
     margin-bottom: 10px;
 }

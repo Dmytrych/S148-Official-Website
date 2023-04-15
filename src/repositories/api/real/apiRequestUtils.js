@@ -1,7 +1,9 @@
+import { appSettings } from "../../../appSettings";
+
 export const GET = "GET";
 export const POST = "POST";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = appSettings.backendUrl;
 
 export async function fetchFrom(urlPostfix, method, data) {
     var request = {

@@ -1,22 +1,50 @@
 import React from 'react';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import { IconButton, styled } from '@mui/material';
 import { noop } from '../../utils';
-import RoundButton from '../RoundButton';
-import './index.css';
+import { useState } from 'react';
 
-function PlusMinusControl({decreaseButtonClick = noop, increaseButtonClick = noop, value}) {
+const limit = 200;
+
+function PlusMinusControl({onChange = noop, defaultValue = 1}) {
+    const [value, setValue] = useState(defaultValue)
+
+    const handleDecrease = () => {
+        const newValue = value > 1 ? value - 1 : 1
+        setValue(newValue)
+        onChange(newValue)
+    }
+
+    const handleIncrease = () => {
+        const newValue = value < limit ? value + 1 : value
+        setValue(newValue)
+        onChange(newValue)
+    }
+
     return (
-        <div className='plus-minus-control'>
-            <div>
-                <RoundButton text="-" onClick={() => decreaseButtonClick()}/>
-            </div>
-            <div className='plus-minus-control-number'>
+        <ControlContainer>
+            <IconButton onClick={handleDecrease}><RemoveCircleOutlineOutlinedIcon /></IconButton>
+            <ValueContainer>
                 {value}
-            </div>
-            <div>
-                <RoundButton text="+" onClick={() => increaseButtonClick()}/>
-            </div>
-        </div>
+            </ValueContainer>
+            <IconButton onClick={handleIncrease}><AddCircleOutlineOutlinedIcon /></IconButton>
+        </ControlContainer>
     );
 }
+
+const ValueContainer = styled('div')({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: '20px'
+})
+
+const ControlContainer = styled('div')({
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 'fit-content'
+})
 
 export default PlusMinusControl;

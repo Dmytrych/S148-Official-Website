@@ -14,6 +14,8 @@ export const locale = {
     universal_oil: "Універсальне мастило",
     universal_oil_detailed: "Збройове мастило для очистки й догляду",
     buy: "Купити",
+    quantity: "Кількість",
+    add_to_cart: "В кошик",
     order: "Замовити",
     slogan: "Ідея народжена в барі, розроблена в академії наук",
     in_your_cart: "У вашому кошику",

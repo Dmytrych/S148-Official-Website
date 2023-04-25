@@ -1,15 +1,15 @@
 import { Formik } from 'formik';
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../../hooks/useCart';
 import { locale } from '../../locale/ua';
 import { create, getAllProductsFiltered } from '../../repositories/api';
 import CartSummary from './components/CartSummary';
 import OrderForm from './components/OrderForm/OrderFrom';
 import './index.css'
-
+import {useProductInCart} from "../../hooks/useProductInCart";
+import {styled} from "@mui/material";
 
 const validateForm = values => {
     const errors = {}
@@ -48,8 +48,8 @@ const initialValues = {
 function Cart() {
     let navigate = useNavigate();
     const dataLoaded = useRef(false)
-    const [products, setProducts] = useState([])
-    const [ cart, saveCart ] = useCart()
+    const [ cartProducts, setCartProducts ] = useState([])
+    const [ cart, addToCartOrUpdateQuantity, removeProductsFromCart, clearCart ] = useProductInCart()
 
     const handleSubmit = async (values) => {
         const dataModel = {
@@ -61,44 +61,60 @@ function Cart() {
                 phoneNumber: values.phoneNumber,
                 email: values.email
             },
-            products: products.map(product => ({
-                productId: product.id,
-                quantity: product.quantity
+            products: cartProducts.map(cartProduct => ({
+                productId: cartProduct.product.id,
+                quantity: cartProduct.quantity
             }))
         }
 
         await create('novaPoshta', dataModel)
 
-        saveCart([])
+        clearCart()
         navigate('/')
     }
 
-    const handleRemoveCartItem = (productId) => {
-        delete cart[productId]
-        setProducts(products.filter(product => product.id != productId))
-        saveCart({...cart})
+    const handleRemoveCartItem = (cartProduct) => {
+        removeProductsFromCart([cartProduct])
     }
 
     useEffect(() => {
-        if(!dataLoaded.current){
+        if (!dataLoaded.current){
             async function fetchData() {
-                const productIds = Object.keys(cart)
+                const productIds = cart.map((cartProduct) => cartProduct.productId)
                 const retrievedProducts = await getAllProductsFiltered(productIds)
-                retrievedProducts.map(product => product.quantity = cart[product.id])
-                setProducts(retrievedProducts)
+                const successfullyFoundProducts = []
+                const failedToFindCartProducts = []
+
+                cart.forEach((cartProduct) => {
+                    const retrievedProduct = retrievedProducts.find((retrievedProduct) => retrievedProduct.id === cartProduct.productId)
+                    if (!retrievedProduct){
+                        failedToFindCartProducts.push(cartProduct)
+                        return;
+                    }
+
+                    successfullyFoundProducts.push({
+                        selectedOptions: cartProduct.selectedOptions,
+                        product: retrievedProduct,
+                        quantity: cartProduct.quantity
+                    })
+                })
+
+                console.log(successfullyFoundProducts)
+                setCartProducts(successfullyFoundProducts)
+                removeProductsFromCart(failedToFindCartProducts)
             }
 
             fetchData();
 
-            return () => {dataLoaded.current = true}
+            return () => { dataLoaded.current = true }
         }
-        if(Object.keys(cart).length <= 0){
+        if (cart.length <= 0){
             navigate('/')
         }
-    }, [cart]);
+    }, [ cart ]);
 
-    return (<div className='order-page'>
-        <div className='order-page-caption page-content-wrapper'>
+    return (<CartPageBackground>
+        <CartPageBox>
             <div><h2>{locale.order_placement}</h2></div>
             <Formik
                 validateOnMount
@@ -106,21 +122,50 @@ function Cart() {
                 validate={validateForm}
                 onSubmit={handleSubmit}
                 children={props => (
-                    <div className='page-content-block order-page-content'>
-                        <div className='order-page-content-block'>
+                    <OrderContentContainer>
+                        <OrderPageContentBlock>
                             <OrderForm {...props} />
-                        </div>
-                        <div className='order-summary-block'>
+                        </OrderPageContentBlock>
+                        <OrderSummaryBlock>
                             <CartSummary
                                 handleSubmit={props.handleSubmit}
                                 disableSubmit={!props.isValid}
-                                products={products}
+                                cartProducts={cartProducts}
                                 removeCartItem={handleRemoveCartItem} />
-                        </div>
-                    </div>
+                        </OrderSummaryBlock>
+                    </OrderContentContainer>
                 )} />
-        </div>
-    </div>)
+        </CartPageBox>
+    </CartPageBackground>)
 }
 
 export default Cart;
+
+const CartPageBackground = styled('div')({
+    minHeight: '90vh',
+    background: 'var(--order-form-gradient)',
+})
+
+const CartPageBox = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+})
+
+const OrderContentContainer = styled('div')({
+    display: 'flex',
+    flexDirection: 'row',
+    width: '80vw',
+})
+
+const OrderPageContentBlock = styled('div')({
+    flex: '3',
+    backgroundColor: 'var(--order-page-content-block-color)',
+    padding: '19px 32px',
+    wordBreak: 'break-all',
+})
+
+const OrderSummaryBlock = styled('div')({
+    flex: '1',
+    fontWeight: 'var(--order-page-highlight-font-weight)'
+})

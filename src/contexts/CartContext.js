@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CartContext = React.createContext({
-  cart: {},
-  saveCart: (state) => {}
+  cart: [],
+  saveCart: (state) => []
 });
 export default CartContext;

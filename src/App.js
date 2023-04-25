@@ -15,7 +15,7 @@ import AppTopBar from "./components/AppTopBar";
 
 function App() {
   const [appDidMount] = useState(false)
-  const [cart, setCart] = useState({});
+  const [cart, setCart] = useState([]);
 
   const saveCart = (newCart) => {
     setLocalCart(newCart)

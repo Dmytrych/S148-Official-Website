@@ -23,11 +23,6 @@
     word-break: break-all;
 }
 
-.order-page-caption {
-    display: flex;
-    flex-direction: column;
-}
-
 .order-page-content-block {
     flex: 3;
     background-color: var(--order-page-content-block-color);

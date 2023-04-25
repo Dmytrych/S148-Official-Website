@@ -6,7 +6,7 @@ export function getAllProducts() {
 }
 
 export async function getAllProductsFiltered(productIds) {
-    return await Promise.resolve(products.filter(product => productIds.map(productId => parseInt(productId)).includes(product.id)))
+    return await Promise.resolve(products.filter(product => productIds.includes(product.id)))
 }
 
 export async function getProductById(productId) {

@@ -13,12 +13,15 @@ import PlusMinusControl from "../../components/PlusMinusControl";
 
 const placeholder = "d556282d-e19c-40fe-9f10-0ac016c53a8a.png"
 
+const defaultQuantity = 1;
+
 const ProductDetails = () => {
     const [product, setProduct] = useState();
     const { productId } = useParams();
-    const [productQuantity, setProductQuantity] = useProductInCart(productId);
+    const [cart, addToCartOrUpdateQuantity, removeProductsFromCart] = useProductInCart();
     const [productProperties, setProductProperties] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
+    const [quantity, setQuantity] = useState(defaultQuantity)
 
     useEffect(() => {
         async function fetchData() {
@@ -53,13 +56,21 @@ const ProductDetails = () => {
         setProductProperties([...productProperties])
     }
 
+    function handleAddToCart() {
+        addToCartOrUpdateQuantity(productId, productProperties, quantity)
+    }
+
+    function handleQuantityChange(newQuantity) {
+        setQuantity(newQuantity)
+    }
+
     return (
         <WholeWindowBlock>
             <Gradient>
                 {product
                     ?
                     <PageContent>
-                        <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div style={{ display: "flex", flexDirection: "row", margin: "20px" }}>
                             <ImageBlock>
                                 <ProductImage>
                                     <ImageBox imageName={product.imageName} />
@@ -87,11 +98,11 @@ const ProductDetails = () => {
                                     </Box>
                                     <Box>
                                         <div>{locale.quantity}:</div>
-                                        <PlusMinusControl />
+                                        <PlusMinusControl onChange={handleQuantityChange} defaultValue={defaultQuantity} />
                                     </Box>
                                     <Box sx={{display: 'flex', flexDirection: 'row', gap: '20px', marginTop: '10px'}}>
                                         <BuyButton variant="contained" size='large'>{locale.buy}</BuyButton>
-                                        <BuyButton variant="contained" size='large'>{locale.add_to_cart}</BuyButton>
+                                        <BuyButton variant="contained" size='large' onClick={handleAddToCart}>{locale.add_to_cart}</BuyButton>
                                     </Box>
                                 </DescriptionBox>
                             </div>
@@ -167,7 +178,7 @@ const Gradient = styled('div')({
 
 const PageContent = styled("div")({
     display: "flex",
-    margin: "30px 10vw 20px 10vw",
+    margin: "0px 10vw 20px 10vw",
     backgroundColor: "white",
     borderRadius: "10px",
     flexDirection: "column"

@@ -11,7 +11,7 @@ function TopBar() {
     const [ cart ] = useCart();
 
     useEffect(() => {
-        setCartLinkDisabled(Object.keys(cart).length <= 0)
+        setCartLinkDisabled(cart && cart.length <= 0)
     }, [cart])
 
     return (

@@ -1,15 +1,10 @@
 import { styled } from '@mui/system';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useProductInCart } from '../../hooks/useProductInCart';
-import { locale } from '../../locale/ua';
 import ImageBox from '../ImageBox';
 import PriceTag from '../PriceTag';
-import RoundedButton from '../RoundedButton';
 
 function TallProductCard({ product }) {
-    const [ productQuantity, setProductQuantity ] = useProductInCart(product.id);
-
     return (
     <Container>
         <ImageContainer>
@@ -21,9 +16,9 @@ function TallProductCard({ product }) {
             </ProductText>
             <ProductPriceBox>
                 <PriceTag value={product.unitPrice}></PriceTag>
-                <div style={{ marginRight: "10px" }}>
-                    <RoundedButton text={locale.buy} onClick={() => setProductQuantity(productQuantity + 1)}/>
-                </div>
+                {/*<div style={{ marginRight: "10px" }}>*/}
+                {/*    <RoundedButton text={locale.buy} onClick={() => setProductQuantity(productQuantity + 1)}/>*/}
+                {/*</div>*/}
             </ProductPriceBox>
         </div>
     </Container>)

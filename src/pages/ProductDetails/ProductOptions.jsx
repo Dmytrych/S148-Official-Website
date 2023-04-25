@@ -21,7 +21,7 @@ export const ProductVersions = ({option, onChange, defaultValue = undefined}) =>
             {option?.variants.map(variant => {
                 return (<div key={variant.name}>
                     {
-                        option.type === optionTypes.text
+                        option.type !== optionTypes.image
                         ? <TextVariant variant={variant} selected={variant.name === selection.name} onClick={() => onVariantClick(variant)}/>
                         : <ImageVariant variant={variant} selected={variant.name === selection.name} onClick={() => onVariantClick(variant)}/>
                     }

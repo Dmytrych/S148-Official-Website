@@ -1,4 +1,4 @@
-import { AppBar, IconButton, Toolbar } from "@mui/material";
+import { AppBar, Toolbar } from "@mui/material";
 import logo from '../../imgShared/S148.png'
 import { styled } from "@mui/system";
 import { NavLink } from "react-router-dom";
@@ -13,7 +13,7 @@ const AppTopBar = () => {
     const [ cart ] = useCart();
 
     useEffect(() => {
-        setCartLinkDisabled(Object.keys(cart).length <= 0)
+        setCartLinkDisabled(cart && cart.length <= 0)
     }, [cart])
 
     return (<StyledAppBar>

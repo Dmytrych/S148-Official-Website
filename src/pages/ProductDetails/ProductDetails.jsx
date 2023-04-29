@@ -1,5 +1,4 @@
 import { Box, Button, CircularProgress, Paper, styled } from "@mui/material";
-import { green, grey, lightGreen } from "@mui/material/colors";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { WholeWindowBlock } from "../../components/WholeWindowBlock/WholeWindowBlock";
@@ -8,17 +7,15 @@ import PriceTag from "../../components/PriceTag";
 import { useProductInCart } from "../../hooks/useProductInCart";
 import { locale } from "../../locale/ua";
 import { getProductById } from "../../repositories/api";
-import { ProductOptions, ProductVersions } from "./ProductOptions";
+import { ProductVersions } from "./ProductOptions";
 import PlusMinusControl from "../../components/PlusMinusControl";
-
-const placeholder = "d556282d-e19c-40fe-9f10-0ac016c53a8a.png"
 
 const defaultQuantity = 1;
 
 const ProductDetails = () => {
     const [product, setProduct] = useState();
     const { productId } = useParams();
-    const [cart, addToCartOrUpdateQuantity, removeProductsFromCart] = useProductInCart();
+    const { addToCartOrUpdateQuantity } = useProductInCart();
     const [productProperties, setProductProperties] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
     const [quantity, setQuantity] = useState(defaultQuantity)

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
 import { styled } from "@mui/system"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import ImageBox from "../../components/ImageBox"
 
 const optionTypes = {

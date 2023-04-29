@@ -48,7 +48,7 @@ export const useProductInCart = () => {
         setCart([])
     }
 
-    return [ cart, addToCartOrUpdateQuantity, removeProductsFromCart, clearCart ];
+    return { cart, addToCartOrUpdateQuantity, removeProductsFromCart, clearCart };
 }
 
 const optionsMatch = (productOptions, comparedProductOptions) => {

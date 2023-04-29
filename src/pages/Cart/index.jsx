@@ -1,15 +1,16 @@
 import { Formik } from 'formik';
-import React, { useState } from 'react'
-import { useRef } from 'react';
+import React from 'react'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { locale } from '../../locale/ua';
-import { create, getAllProductsFiltered } from '../../repositories/api';
+import { create } from '../../repositories/api';
 import CartSummary from './components/CartSummary';
 import OrderForm from './components/OrderForm/OrderFrom';
 import './index.css'
-import {useProductInCart} from "../../hooks/useProductInCart";
-import {styled} from "@mui/material";
+import { useProductInCart } from "../../hooks/useProductInCart";
+import { styled } from "@mui/material";
+import {useCartWithProductInfo} from "../../hooks/useCartWithProductInfo";
+import CartProductList from "./components/CartProductList";
 
 const validateForm = values => {
     const errors = {}
@@ -47,9 +48,8 @@ const initialValues = {
 
 function Cart() {
     let navigate = useNavigate();
-    const dataLoaded = useRef(false)
-    const [ cartProducts, setCartProducts ] = useState([])
-    const [ cart, addToCartOrUpdateQuantity, removeProductsFromCart, clearCart ] = useProductInCart()
+    const { cartWithProductInfo } = useCartWithProductInfo()
+    const { removeProductsFromCart, clearCart } = useProductInCart()
 
     const handleSubmit = async (values) => {
         const dataModel = {
@@ -61,7 +61,7 @@ function Cart() {
                 phoneNumber: values.phoneNumber,
                 email: values.email
             },
-            products: cartProducts.map(cartProduct => ({
+            products: cartWithProductInfo.map(cartProduct => ({
                 productId: cartProduct.product.id,
                 quantity: cartProduct.quantity
             }))
@@ -77,46 +77,12 @@ function Cart() {
         removeProductsFromCart([cartProduct])
     }
 
-    useEffect(() => {
-        if (!dataLoaded.current){
-            async function fetchData() {
-                const productIds = cart.map((cartProduct) => cartProduct.productId)
-                const retrievedProducts = await getAllProductsFiltered(productIds)
-                const successfullyFoundProducts = []
-                const failedToFindCartProducts = []
-
-                cart.forEach((cartProduct) => {
-                    const retrievedProduct = retrievedProducts.find((retrievedProduct) => retrievedProduct.id === cartProduct.productId)
-                    if (!retrievedProduct){
-                        failedToFindCartProducts.push(cartProduct)
-                        return;
-                    }
-
-                    successfullyFoundProducts.push({
-                        selectedOptions: cartProduct.selectedOptions,
-                        product: retrievedProduct,
-                        quantity: cartProduct.quantity
-                    })
-                })
-
-                console.log(successfullyFoundProducts)
-                setCartProducts(successfullyFoundProducts)
-                removeProductsFromCart(failedToFindCartProducts)
-            }
-
-            fetchData();
-
-            return () => { dataLoaded.current = true }
-        }
-        if (cart.length <= 0){
-            navigate('/')
-        }
-    }, [ cart ]);
-
     return (<CartPageBackground>
         <CartPageBox>
             <div><h2>{locale.order_placement}</h2></div>
-            <Formik
+            <CartProductList/>
+            { cartWithProductInfo && cartWithProductInfo.length > 0 &&
+                <Formik
                 validateOnMount
                 initialValues={initialValues}
                 validate={validateForm}
@@ -130,11 +96,11 @@ function Cart() {
                             <CartSummary
                                 handleSubmit={props.handleSubmit}
                                 disableSubmit={!props.isValid}
-                                cartProducts={cartProducts}
+                                cartProducts={cartWithProductInfo}
                                 removeCartItem={handleRemoveCartItem} />
                         </OrderSummaryBlock>
                     </OrderContentContainer>
-                )} />
+                )} />}
         </CartPageBox>
     </CartPageBackground>)
 }

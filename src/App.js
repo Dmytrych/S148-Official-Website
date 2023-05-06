@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Order from "./pages/Order";
 import Products from "./pages/Products";
@@ -10,7 +9,6 @@ import Cart from "./pages/Cart";
 import "./App.css"
 import "./styles/colors.css"
 import ProductDetails from "./pages/ProductDetails";
-import { AppBar, IconButton, Toolbar } from "@mui/material";
 import AppTopBar from "./components/AppTopBar";
 
 function App() {

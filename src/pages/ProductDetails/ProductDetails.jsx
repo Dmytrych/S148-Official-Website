@@ -1,6 +1,6 @@
-import { Box, Button, CircularProgress, Paper, styled } from "@mui/material";
+import { Box, Button, CircularProgress, styled } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { WholeWindowBlock } from "../../components/WholeWindowBlock/WholeWindowBlock";
 import ImageBox from "../../components/ImageBox";
 import PriceTag from "../../components/PriceTag";
@@ -9,10 +9,12 @@ import { locale } from "../../locale/ua";
 import { getProductById } from "../../repositories/api";
 import { ProductVersions } from "./ProductOptions";
 import PlusMinusControl from "../../components/PlusMinusControl";
+import {ProductName} from "../../components/ProductName";
 
 const defaultQuantity = 1;
 
 const ProductDetails = () => {
+    const navigate = useNavigate();
     const [product, setProduct] = useState();
     const { productId } = useParams();
     const { addToCartOrUpdateQuantity } = useProductInCart();
@@ -26,7 +28,7 @@ const ProductDetails = () => {
             setProduct(fetchedProduct)
         }
         fetchData();
-    }, []);
+    }, [productId]);
 
     useEffect(() => {
         const defaultProductProperties = product?.options.map((option) => { return {
@@ -57,6 +59,11 @@ const ProductDetails = () => {
         addToCartOrUpdateQuantity(productId, productProperties, quantity)
     }
 
+    function handleInstantBuy() {
+        addToCartOrUpdateQuantity(productId, productProperties, quantity)
+        navigate('/cart')
+    }
+
     function handleQuantityChange(newQuantity) {
         setQuantity(newQuantity)
     }
@@ -74,14 +81,12 @@ const ProductDetails = () => {
                                 </ProductImage>
                             </ImageBlock>
                             <div style={{ flex: 2 }}>
-                                <ProductNamePaper>
-                                    <Box sx={{ fontSize: "var(--global-big-text-size)", fontWeight: "600" }}>
-                                        {product.name}
-                                    </Box>
+                                <ProductTitleBlock>
+                                    <ProductName value={product.name}/>
                                     <Box sx={{ lineHeight: "2" }}>
                                         {product.subtitle}
                                     </Box>
-                                </ProductNamePaper>
+                                </ProductTitleBlock>
                                 <DescriptionBox>
                                     <PriceTagContainer>
                                         <PriceTag value={totalPrice} />
@@ -98,7 +103,7 @@ const ProductDetails = () => {
                                         <PlusMinusControl onChange={handleQuantityChange} defaultValue={defaultQuantity} />
                                     </Box>
                                     <Box sx={{display: 'flex', flexDirection: 'row', gap: '20px', marginTop: '10px'}}>
-                                        <BuyButton variant="contained" size='large'>{locale.buy}</BuyButton>
+                                        <BuyButton variant="contained" size='large' onClick={handleInstantBuy}>{locale.buy}</BuyButton>
                                         <BuyButton variant="contained" size='large' onClick={handleAddToCart}>{locale.add_to_cart}</BuyButton>
                                     </Box>
                                 </DescriptionBox>
@@ -164,7 +169,7 @@ const DescriptionBox = styled("div")({
     margin: "10px 20px"
 })
 
-const ProductNamePaper = styled('div')({
+const ProductTitleBlock = styled('div')({
     margin: "30px 0px 30px 30px"
 })
 

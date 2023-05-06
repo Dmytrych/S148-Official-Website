@@ -2,6 +2,7 @@ import { Box } from "@mui/material"
 import { styled } from "@mui/system"
 import { useState } from "react"
 import ImageBox from "../../components/ImageBox"
+import {TextProductVariant, VariantContainer} from "../../components/TextProductVariant";
 
 const optionTypes = {
     text: "text",
@@ -22,17 +23,13 @@ export const ProductVersions = ({option, onChange, defaultValue = undefined}) =>
                 return (<div key={variant.name}>
                     {
                         option.type !== optionTypes.image
-                        ? <TextVariant variant={variant} selected={variant.name === selection.name} onClick={() => onVariantClick(variant)}/>
+                        ? <TextProductVariant variantName={variant.name} selected={variant.name === selection.name} onClick={() => onVariantClick(variant)}/>
                         : <ImageVariant variant={variant} selected={variant.name === selection.name} onClick={() => onVariantClick(variant)}/>
                     }
                 </div>)
             })}
         </VariantsContainer>
     </OptionBlock>)
-}
-
-const TextVariant = ({variant, selected, onClick}) => {
-    return (<TextVariantContainer selected={selected} onClick={onClick}>{variant.name}</TextVariantContainer>)
 }
 
 const ImageVariant = ({variant, selected, onClick}) => {
@@ -52,28 +49,6 @@ const VariantsContainer = styled('div')({
     flexWrap: "wrap",
     gap: "20px"
 })
-
-const VariantContainer = styled('div')((props) => {
-    return {
-        ":hover": {
-            border: props.selected ? "var(--global-selected-border)" : "var(--global-hover-border)"
-        },
-        userSelect: "none",
-        cursor: "pointer",
-        borderRadius: "6px",
-        border: props.selected ? "var(--global-selected-border)" : "var(--global-unselected-border)",
-        width: "fit-content",
-        height: "25px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-    }
-})
-
-const TextVariantContainer = styled(VariantContainer)({
-    padding: "0px 10px"
-})
-
 
 const ImageVariantContainer = styled(VariantContainer)({
     width: "70px",

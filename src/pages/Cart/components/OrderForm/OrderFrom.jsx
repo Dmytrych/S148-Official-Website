@@ -3,12 +3,18 @@ import { locale } from '../../../../locale/ua';
 import FormParagraphSign from '../FormParagraphSign';
 import FormField from '../../../../components/FormField';
 import './index.css';
+import CartProductList from "../CartProductList";
+import {styled} from "@mui/material";
 
 function OrderForm({ errors, touched, handleChange, setFieldValue, values, handleSubmit }) {
     return (
         <>
             <div><FormParagraphSign numberTag={1} text={locale.contact_info} /></div>
-            <div className='order-page-content-info-block'>
+            <OrderPageContentInfoBlock>
+                <CartProductList/>
+            </OrderPageContentInfoBlock>
+            <div><FormParagraphSign numberTag={2} text={locale.contact_info} /></div>
+            <OrderPageContentInfoBlock>
                 <div className='flex-column'>
                     <div className='credentials-block'>
                         <FormField onChange={handleChange} name="name"
@@ -28,9 +34,9 @@ function OrderForm({ errors, touched, handleChange, setFieldValue, values, handl
                             errorText={errors.phoneNumber} error={touched.phoneNumber && errors.phoneNumber} />
                     </div>
                 </div>
-            </div>
-            <div onClick={handleSubmit}><FormParagraphSign numberTag={2} text={locale.delivery} /></div>
-            <div className='order-page-content-info-block'>
+            </OrderPageContentInfoBlock>
+            <div onClick={handleSubmit}><FormParagraphSign numberTag={3} text={locale.delivery} /></div>
+            <OrderPageContentInfoBlock>
                 <div className='flex-column'>
                     <div className='credentials-block'>
                         <FormField onChange={handleChange} name="description"
@@ -38,9 +44,14 @@ function OrderForm({ errors, touched, handleChange, setFieldValue, values, handl
                             errorText={errors.description} error={touched.description && errors.description} />
                     </div>
                 </div>
-            </div>
+            </OrderPageContentInfoBlock>
         </>
     )
 }
 
 export default OrderForm;
+
+const OrderPageContentInfoBlock = styled('div')({
+    marginLeft: '2rem',
+    padding: '20px 15px',
+})

@@ -24,7 +24,7 @@ export const useProductInCart = () => {
             }
         }
         else if ( existingProduct ) {
-            existingProduct.quantity = quantity;
+            existingProduct.quantity += quantity;
             setCart([...cart]);
         }
     }

@@ -80,7 +80,6 @@ function Cart() {
     return (<CartPageBackground>
         <CartPageBox>
             <div><h2>{locale.order_placement}</h2></div>
-            <CartProductList/>
             { cartWithProductInfo && cartWithProductInfo.length > 0 &&
                 <Formik
                 validateOnMount

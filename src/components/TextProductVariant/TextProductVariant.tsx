@@ -1,10 +1,16 @@
 import {styled} from "@mui/system";
 
-export const TextProductVariant = ({variantName, selected, onClick}) => {
+type TextProductVariantInput = {
+    variantName: string,
+    selected: boolean,
+    onClick: () => void
+}
+
+export const TextProductVariant = ({variantName, selected, onClick}: TextProductVariantInput) => {
     return (<TextVariantContainer selected={selected} onClick={onClick}>{variantName}</TextVariantContainer>)
 }
 
-export const VariantContainer = styled('div')((props) => {
+export const VariantContainer = styled('div')((props: { selected: boolean }) => {
     return {
         ":hover": {
             border: props.selected ? "var(--global-selected-border)" : "var(--global-hover-border)"

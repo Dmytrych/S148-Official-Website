@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Order from "./pages/Order";
 import Products from "./pages/Products";
-import CartContext from "./contexts/CartContext";
+import { CartProduct, CartContext } from './contexts/CartContext'
 import { setLocalCart, getLocalCart } from "./repositories/cartRepository";
 import Cart from "./pages/Cart";
 import "./App.css"
@@ -13,9 +12,9 @@ import AppTopBar from "./components/AppTopBar";
 
 function App() {
   const [appDidMount] = useState(false)
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([] as CartProduct[]);
 
-  const saveCart = (newCart) => {
+  const saveCart = (newCart: CartProduct[]) => {
     setLocalCart(newCart)
     setCart(newCart)
   }
@@ -35,7 +34,6 @@ function App() {
         <AppTopBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/order" element={<Order />} />
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:productId" element={<ProductDetails />} />

@@ -1,16 +1,22 @@
 import { Box, styled } from '@mui/material'
 import { useState } from "react"
 import ImageBox from "../../components/ImageBox"
-import {TextProductVariant, VariantContainer} from "../../components/TextProductVariant";
+import {
+    TextProductVariant,
+    VariantContainer,
+} from "../../components/TextProductVariant";
+import { ImageOptionVariant, OptionType, ProductOptionVariant } from '../../repositories/api/Dto/OptionDto'
+import { ProductOptionDto } from '../../repositories/api/Dto/ProductDto'
 
-const optionTypes = {
-    text: "text",
-    image: "image"
+type ProductVersionsDisplayInput = {
+    option: ProductOptionDto,
+    onChange: (variant: ProductOptionVariant) => void,
+    defaultValue?: ProductOptionVariant
 }
 
-export const ProductVersions = ({option, onChange, defaultValue = undefined}) => {
+export const ProductVersions = ({ option, onChange, defaultValue } : ProductVersionsDisplayInput) => {
     const [ selection, setSelection ] = useState(defaultValue ?? option.variants[0])
-    const onVariantClick = (variant) => {
+    const onVariantClick = (variant: ProductOptionVariant) => {
         setSelection(variant)
         onChange(variant)
     }
@@ -21,7 +27,7 @@ export const ProductVersions = ({option, onChange, defaultValue = undefined}) =>
             {option?.variants.map(variant => {
                 return (<div key={variant.name}>
                     {
-                        option.type !== optionTypes.image
+                        option.type !== OptionType.Image
                         ? <TextProductVariant variantName={variant.name} selected={variant.name === selection.name} onClick={() => onVariantClick(variant)}/>
                         : <ImageVariant variant={variant} selected={variant.name === selection.name} onClick={() => onVariantClick(variant)}/>
                     }
@@ -31,7 +37,13 @@ export const ProductVersions = ({option, onChange, defaultValue = undefined}) =>
     </OptionBlock>)
 }
 
-const ImageVariant = ({variant, selected, onClick}) => {
+type ImageVariantInput = {
+    variant: ImageOptionVariant,
+    selected: boolean,
+    onClick: () => void
+}
+
+const ImageVariant = ({variant, selected, onClick}: ImageVariantInput) => {
     return (<ImageVariantContainer selected={selected} onClick={onClick}>
             <ImageBox imageName={variant.image} />
         </ImageVariantContainer>)

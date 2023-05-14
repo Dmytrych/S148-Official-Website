@@ -1,6 +1,5 @@
 import { Formik } from 'formik';
-import React from 'react'
-import { useEffect } from 'react';
+import * as React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { locale } from '../../locale/ua';
 import { create } from '../../repositories/api';
@@ -10,10 +9,18 @@ import './index.css'
 import { useProductInCart } from "../../hooks/useProductInCart";
 import { styled } from "@mui/material";
 import {useCartWithProductInfo} from "../../hooks/useCartWithProductInfo";
-import CartProductList from "./components/CartProductList";
+
+type CartValidationErrors = {
+    name?: string,
+    middleName?: string,
+    surname?: string,
+    email?: string,
+    phoneNumber?: string,
+    description?: string
+}
 
 const validateForm = values => {
-    const errors = {}
+    const errors: CartValidationErrors = {}
     if (!values.name || values.name.length > 20) {
         errors.name = locale.field_should_not_be_empty_or_bigger_than_20;
     }

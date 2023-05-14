@@ -1,31 +1,33 @@
 import { useCart } from "./useCart";
+import { ProductOptionDto } from '../repositories/api/Dto/ProductDto'
+import { OptionSelection } from '../contexts/CartContext'
 
 export const useProductInCart = () => {
-    const [ cart, setCart ] = useCart();
+    const { cart, saveCart } = useCart();
 
     const getExistingProduct = (productId, productOptions) => {
         return cart.find((cartProduct) => {
-            return cartProduct.productId === productId && optionsMatch(cartProduct.options, productOptions);
+            return cartProduct.productId === productId && optionsMatch(cartProduct.selectedOptions, productOptions);
         })
     }
 
-    const addToCartOrUpdateQuantity = (productId, productOptions, quantity) => {
+    const addToCartOrUpdateQuantity = (productId: number, productOptions: OptionSelection[], quantity: number) => {
         const existingProduct = cart.find((cartProduct) => {
-            return cartProduct.productId === productId && optionsMatch(cartProduct.options, productOptions);
+            return cartProduct.productId === productId && optionsMatch(cartProduct.selectedOptions, productOptions);
         })
 
         if (!existingProduct && quantity > 0){
-            setCart([...cart, {productId, quantity, options: productOptions}])
+            saveCart([...cart, { productId, quantity, selectedOptions: productOptions }])
         }
         else  if ( existingProduct && quantity <= 0) {
             const productIndex = cart.indexOf(existingProduct)
             if(productIndex >= 0) {
-                setCart(cart.splice(productIndex, 1));
+                saveCart(cart.splice(productIndex, 1));
             }
         }
         else if ( existingProduct ) {
             existingProduct.quantity += quantity;
-            setCart([...cart]);
+            saveCart([...cart]);
         }
     }
 
@@ -40,12 +42,12 @@ export const useProductInCart = () => {
                     updatedCart = updatedCart.splice(productIndex, 1);
                 }
             })
-            setCart([...updatedCart])
+            saveCart([...updatedCart])
         }
     }
 
     const clearCart = () => {
-        setCart([])
+        saveCart([])
     }
 
     return { cart, addToCartOrUpdateQuantity, removeProductsFromCart, clearCart };

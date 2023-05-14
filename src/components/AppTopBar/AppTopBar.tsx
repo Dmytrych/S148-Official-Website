@@ -1,5 +1,5 @@
 import { AppBar, Toolbar } from "@mui/material";
-import logo from '../../imgShared/S148.png'
+import logo from "../../imgShared/S148.png";
 import { styled } from "@mui/system";
 import { NavLink } from "react-router-dom";
 import { locale } from "../../locale/ua";
@@ -10,7 +10,7 @@ const topBarHeight = "80px"
 
 const AppTopBar = () => {
     const [cartLinkDisabled, setCartLinkDisabled] = useState(true);
-    const [ cart ] = useCart();
+    const { cart } = useCart();
 
     useEffect(() => {
         setCartLinkDisabled(cart && cart.length <= 0)

@@ -1,6 +1,6 @@
 import { Box, Button, CircularProgress, styled } from "@mui/material";
 import { useEffect, useState } from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import { WholeWindowBlock } from "../../components/WholeWindowBlock/WholeWindowBlock";
 import ImageBox from "../../components/ImageBox";
 import PriceTag from "../../components/PriceTag";
@@ -9,32 +9,40 @@ import { locale } from "../../locale/ua";
 import { getProductById } from "../../repositories/api";
 import { ProductVersions } from "./ProductOptions";
 import PlusMinusControl from "../../components/PlusMinusControl";
-import {ProductName} from "../../components/ProductName";
+import { ProductName } from "../../components/ProductName";
+import { ProductDto } from '../../repositories/api/Dto/ProductDto'
+import { OptionSelection } from '../../contexts/CartContext'
+import { ProductOptionVariant } from '../../repositories/api/Dto/OptionDto'
 
 const defaultQuantity = 1;
 
 const ProductDetails = () => {
     const navigate = useNavigate();
-    const [product, setProduct] = useState();
+    const [product, setProduct] = useState<ProductDto>();
     const { productId } = useParams();
     const { addToCartOrUpdateQuantity } = useProductInCart();
-    const [productProperties, setProductProperties] = useState([])
-    const [totalPrice, setTotalPrice] = useState(0)
-    const [quantity, setQuantity] = useState(defaultQuantity)
+    const [productProperties, setProductProperties] = useState<OptionSelection[]>([])
+    const [totalPrice, setTotalPrice] = useState<number>(0)
+    const [quantity, setQuantity] = useState<number>(defaultQuantity)
+
+    useEffect(() => {
+        if(isNaN(Number(productId))){
+            navigate('/')
+        }
+    }, [navigate, productId]);
 
     useEffect(() => {
         async function fetchData() {
-            const fetchedProduct = await getProductById(productId)
-            setProduct(fetchedProduct)
+            return await getProductById(Number(productId))
         }
-        fetchData();
-    }, [productId]);
+        fetchData().then(fetchedProduct => setProduct(fetchedProduct));
+    }, [ productId ]);
 
     useEffect(() => {
         const defaultProductProperties = product?.options.map((option) => { return {
-            optionName: option.name,
+            option: option,
             selectedVariant: getDefaultVariant(option.variants)
-        }}) ?? []
+        } as OptionSelection}) ?? []
         setProductProperties(defaultProductProperties)
     }, [product])
 
@@ -49,22 +57,22 @@ const ProductDetails = () => {
         }
     }, [productProperties, product])
 
-    function setOptionValue(optionName, selectedVariant) {
-        const changedProperty = productProperties.find(property => property.optionName === optionName)
+    function setOptionValue(optionName: string, selectedVariant: ProductOptionVariant) {
+        const changedProperty = productProperties.find(property => property.option.name === optionName)
         changedProperty.selectedVariant = selectedVariant
         setProductProperties([...productProperties])
     }
 
     function handleAddToCart() {
-        addToCartOrUpdateQuantity(productId, productProperties, quantity)
+        addToCartOrUpdateQuantity(Number(productId), productProperties, quantity)
     }
 
     function handleInstantBuy() {
-        addToCartOrUpdateQuantity(productId, productProperties, quantity)
+        addToCartOrUpdateQuantity(Number(productId), productProperties, quantity)
         navigate('/cart')
     }
 
-    function handleQuantityChange(newQuantity) {
+    function handleQuantityChange(newQuantity: number) {
         setQuantity(newQuantity)
     }
 
@@ -120,7 +128,7 @@ const ProductDetails = () => {
             </Gradient>
         </WholeWindowBlock>)
 
-    function getDefaultVariant(variants) {
+    function getDefaultVariant(variants: ProductOptionVariant[]): ProductOptionVariant {
         return variants.find(variant => variant.isDefault) ?? variants[0]
     }
 }

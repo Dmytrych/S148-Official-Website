@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import React from 'react'
+import * as React from 'react'
 import WholeWindowBlock from '../../components/WholeWindowBlock';
 import TallProductCard from '../../components/TallProductCard'
 import { useProducts } from '../../hooks/useProducts';

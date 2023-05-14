@@ -12,7 +12,7 @@ export type CartProductWithInfo = {
 
 export const useCartWithProductInfo = () => {
     const { cart, removeProductsFromCart } = useProductInCart()
-    const [ cartWithProductInfo, setCartWithProductInfo] = useState([])
+    const [ cartWithProductInfo, setCartWithProductInfo] = useState<CartProductWithInfo[]>([])
 
     useEffect(() => {
         async function fetchData() {
@@ -33,13 +33,13 @@ export const useCartWithProductInfo = () => {
                     selectedOptions: cartProduct.selectedOptions,
                     product: retrievedProduct,
                     quantity: cartProduct.quantity
-                })
+                } as CartProductWithInfo)
             })
 
             console.log(failedToFindCartProducts)
 
             if(failedToFindCartProducts && failedToFindCartProducts.length > 0){
-                //removeProductsFromCart(failedToFindCartProducts)
+                removeProductsFromCart(failedToFindCartProducts)
             }
             if(successfullyFoundProducts && successfullyFoundProducts.length > 0){
                 setCartWithProductInfo(successfullyFoundProducts)

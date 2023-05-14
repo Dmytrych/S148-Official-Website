@@ -1,5 +1,3 @@
-import { loading } from "../utils";
-
 export const locale = {
     email: "E-mail адреса",
     email_placeholder: "samplemail@gmail.com",
@@ -14,7 +12,10 @@ export const locale = {
     universal_oil: "Універсальне мастило",
     universal_oil_detailed: "Збройове мастило для очистки й догляду",
     buy: "Купити",
+    product_name: "Назва продукту",
     quantity: "Кількість",
+    options: "Опції",
+    unit_price: "Ціна",
     add_to_cart: "В кошик",
     order: "Замовити",
     slogan: "Ідея народжена в барі, розроблена в академії наук",

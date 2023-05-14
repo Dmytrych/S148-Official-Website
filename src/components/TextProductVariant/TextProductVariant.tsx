@@ -1,12 +1,13 @@
 import {styled} from "@mui/system";
+import { noop } from '../../utils'
 
 type TextProductVariantInput = {
     variantName: string,
     selected: boolean,
-    onClick: () => void
+    onClick?: () => void
 }
 
-export const TextProductVariant = ({variantName, selected, onClick}: TextProductVariantInput) => {
+export const TextProductVariant = ({variantName, selected, onClick = noop}: TextProductVariantInput) => {
     return (<TextVariantContainer selected={selected} onClick={onClick}>{variantName}</TextVariantContainer>)
 }
 

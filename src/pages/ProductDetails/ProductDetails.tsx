@@ -13,6 +13,7 @@ import { ProductName } from "../../components/ProductName";
 import { ProductDto } from '../../repositories/api/Dto/ProductDto'
 import { OptionSelection } from '../../contexts/CartContext'
 import { ProductOptionVariant } from '../../repositories/api/Dto/OptionDto'
+import { getPriceWithOptions } from '../../helpers/price'
 
 const defaultQuantity = 1;
 
@@ -48,12 +49,7 @@ const ProductDetails = () => {
 
     useEffect(() => {
         if(product && productProperties){
-            const propertyPrice = productProperties.length > 0 
-                ? productProperties.reduce((acc, selection) => {
-                    return acc + selection.selectedVariant.price
-                }, 0)
-                : 0
-            setTotalPrice(product.unitPrice + propertyPrice)
+            setTotalPrice(getPriceWithOptions(product, productProperties))
         }
     }, [productProperties, product])
 
